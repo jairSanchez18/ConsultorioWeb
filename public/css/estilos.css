@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.title-login{
+    margin-bottom: 100px;
+}
+
+.title-contact{
+    margin-bottom: 50px;
+}
+
+.formulario{
+    border-left: 1px solid lightgray;
+    padding: 16px;
+}
+
+.grid-bienvenida{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: "gridA gridB gridB";
+}
+
+.gridA{
+    grid-area: gridA;
+}
+
+.gridB{
+    grid-area: gridB;
+}
+
+@media (max-width:820px){
+    .grid-bienvenida{
+        grid-template-columns: 1fr;
+        grid-template-areas: "gridA"
+                             "gridB";
+    }
+
+    .img-login{
+        width: 400px;
+    }
+
+    .table-pacientes{
+        font-size: 12px;
+    }
+
+    .font-opciones{
+        font-size: 12px;
+    }
+}
