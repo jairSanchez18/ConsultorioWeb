@@ -3,49 +3,93 @@
     padding: 0;
 }
 
-.title-login{
+.title-login {
     margin-bottom: 100px;
 }
 
-.title-contact{
+.title-contact {
     margin-bottom: 50px;
 }
 
-.formulario{
+.formulario {
     border-left: 1px solid lightgray;
     padding: 16px;
 }
 
-.grid-bienvenida{
+.grid-bienvenida {
     display: grid;
     grid-template-columns: 40% 60%;
     grid-template-areas: "gridA gridB gridB";
 }
 
-.gridA{
+.gridA {
     grid-area: gridA;
 }
 
-.gridB{
+.gridB {
     grid-area: gridB;
 }
 
-@media (max-width:820px){
-    .grid-bienvenida{
+.grid-expediente {
+    display: grid;
+    grid-template-areas: "expeA expeB";
+    gap: 5px;
+}
+
+.expeA {
+    grid-area: expeA;
+}
+
+.expeB {
+    grid-area: expeB;
+}
+
+.grid-informacion {
+    display: grid;
+    grid-template-areas: "expedA expedB";
+    gap: 5px;
+}
+
+.expedA {
+    grid-area: expedA;
+}
+
+.expedB {
+    grid-area: expedB;
+}
+
+@media (max-width:820px) {
+    .grid-bienvenida {
         grid-template-columns: 1fr;
         grid-template-areas: "gridA"
-                             "gridB";
+            "gridB";
     }
 
-    .img-login{
+    .grid-expediente {
+        grid-template-columns: 1fr;
+        grid-template-areas: "expeB"
+            "expeA";
+    }
+
+    .grid-informacion {
+        grid-template-columns: 1fr;
+        grid-template-areas: "expedA"
+            "expedB";
+    }
+
+    .img-login {
         width: 400px;
     }
 
-    .table-pacientes{
+    .table-pacientes {
         font-size: 12px;
     }
 
-    .font-opciones{
+    .font-opciones {
         font-size: 12px;
+    }
+
+    .lista-consulta{
+        margin-bottom: 15px;
     }
 }

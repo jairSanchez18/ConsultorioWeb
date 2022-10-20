@@ -15,9 +15,19 @@ if (isset($_GET['op'])) {
         $controller->validar();
     } else if ($opcion == "salir") {
         $controller->salir();
-    }else if ($opcion == "pacientes") {
-        $controller->pacientes();
-    }  else {
+    } else if ($opcion == "paciente") {
+        $controller->paciente();
+    } else if ($opcion == "reporte") {
+        $controller->reporte();
+    } else if ($opcion == "expediente") {
+        $controller->expediente();
+    } else if ($opcion == "perfil") {
+        $controller->perfil();
+    } else if ($opcion == "expedientepac") {
+        $controller->expedientepac();
+    } else if ($opcion == "buscador") {
+        $controller->buscador();
+    } else {
         $controller->error404();
     }
 } else {

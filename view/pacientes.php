@@ -20,7 +20,7 @@
         require_once('template/header.php');
         ?>
     </header>
-    <div class="container">
+    <div class="container mb-5">
         <div class="text-primary mt-5">
             <h3 class="h3"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes</h3>
         </div>
@@ -50,9 +50,7 @@
                                 Opciones Generales
                             </button>
                             <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="./?op=expedientepac">Ver el expediente clinico</a></li>
                             </ul>
                         </div>
                     </td>
@@ -69,9 +67,9 @@
                                 Opciones Generales
                             </button>
                             <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">Ver el paciente</a></li>
+                                <li><a class="dropdown-item" href="#">Crear una cita nueva</a></li>
+                                <li><a class="dropdown-item" href="#">Crear una consulta nueva</a></li>
                             </ul>
                         </div>
                     </td>
@@ -88,9 +86,9 @@
                                 Opciones Generales
                             </button>
                             <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">Ver el paciente</a></li>
+                                <li><a class="dropdown-item" href="#">Crear una cita nueva</a></li>
+                                <li><a class="dropdown-item" href="#">Crear una consulta nueva</a></li>
                             </ul>
                         </div>
                     </td>
