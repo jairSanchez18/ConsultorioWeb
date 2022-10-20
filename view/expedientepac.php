@@ -197,28 +197,28 @@
                                     <label for="floatingSelect">Lugar (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="motivo" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Motivo de la consulta (Opcional)</label>
+                                    <textarea class="form-control" name="motivo" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <label for="floatingTextarea">Motivo de la Consulta (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="examenfisico" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Examen Fisico (Opcional)</label>
+                                    <textarea class="form-control" name="examenfisico" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <label for="floatingTextarea">Examen Fisico (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="diagnostico" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Diagnostico (Opcional)</label>
+                                    <textarea class="form-control" name="diagnostico" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <label for="floatingTextarea">Diagnostico (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="recomendacion" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Recomendaciones (Opcional)</label>
+                                    <textarea class="form-control" name="recomendacion" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <label for="floatingTextarea">Recomendaciones (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="receta" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Receta (Opcional)</label>
+                                    <textarea class="form-control" name="receta" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <label for="floatingTextarea">Receta (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" name="observacion" class="form-control" id="floatingInput" placeholder="cama">
-                                    <label for="floatingInput">Observaciones (Opcional)</label>
+                                    <textarea class="form-control" name="observacion" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"></textarea>
+                                    <label for="floatingTextarea">Observaciones (Opcional)</label>
                                 </div>
 
                             </div>
