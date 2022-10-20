@@ -9,13 +9,13 @@
                     <a class="nav-link active" aria-current="page" href="./?op=acceder">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./?op=pacientes">Pacientes</a>
+                    <a class="nav-link" href="./?op=paciente">Pacientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./?op=reportes">Reportes</a>
+                    <a class="nav-link" href="./?op=reporte">Reportes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./?op=expediente">Expedientes</a>
+                    <a class="nav-link" href="./?op=expediente">Nuevo Expediente</a>
                 </li>
             </ul>
             <ul class="navbar-nav">

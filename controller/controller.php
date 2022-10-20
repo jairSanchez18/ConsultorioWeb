@@ -49,8 +49,33 @@ class Controller
         require('view/login.php');
     }
 
-    public function pacientes()
+    public function paciente()
     {
         require('view/pacientes.php');
+    }
+
+    public function reporte()
+    {
+        require('view/reportes.php');
+    }
+
+    public function expediente()
+    {
+        require('view/expedientes.php');
+    }
+
+    public function expedientepac()
+    {
+        require('view/expedientepac.php');
+    }
+
+    public function buscador()
+    {
+        require('view/buscador.php');
+    }
+
+    public function perfil()
+    {
+        require('view/perfil.php');
     }
 }

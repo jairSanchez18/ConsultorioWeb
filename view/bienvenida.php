@@ -37,23 +37,26 @@
                 <div class="bg-primary text-white p-2 fw-bold">
                     <i class="bi bi-search px-2"></i>Buscador
                 </div>
-                <div class="form-floating m-3">
-                    <input type="text" name="nombre" class="form-control" id="floatingInput" placeholder="Nombre o Apellido" required>
-                    <label for="floatingInput">Ingrese el Nombre o Apellido</label>
-                </div>
-                <div class="entrar d-grid gap-2 m-3">
-                    <button class="btn btn-outline-dark p-2" type="submit">Buscar paciente</button>
-                </div>
+                <form action="./?op=buscador" method="post">
+                    <div class="form-floating m-3">
+                        <input type="text" name="nombre" class="form-control" id="floatingInput" placeholder="Nombre o Apellido" required>
+                        <label for="floatingInput">Ingrese la cedula del paciente</label>
+                    </div>
+                    <div class="entrar d-grid gap-2 m-3">
+                        <button class="btn btn-outline-dark p-2" type="submit">Buscar paciente</button>
+                    </div>
+                </form>
             </div>
             <div class="gridB">
                 <div class="bg-primary text-white p-2 fw-bold">
-                    <i class="bi bi-journal-medical px-2"></i>Citas recibidas
+                    <i class="bi bi-journal-medical px-2"></i>Citas Pendientes
                 </div>
                 <table class="table font-opciones">
                     <thead>
                         <tr>
                             <th>Paciente</th>
                             <th>Motivo</th>
+                            <th>Fecha de cita</th>
                             <th class="text-center">Ver Detalles</th>
                         </tr>
                     </thead>
@@ -61,11 +64,13 @@
                         <tr>
                             <td>Juan Sapata</td>
                             <td>Dolores Musculares</td>
-                            <td class="text-center"><a href="#" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                            <td>22/11/2022</td>
+                            <td class="text-center"><a href="./?op=expedientepac" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
                         </tr>
                         <tr>
                             <td>Pedro Suira</td>
                             <td>Radiografía</td>
+                            <td>01/02/2023</td>
                             <td class="text-center"><a href="#" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
                         </tr>
                     </tbody>
