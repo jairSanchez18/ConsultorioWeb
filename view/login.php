@@ -34,8 +34,8 @@
                         <p class="mb-3 text-center <?php if(isset($_GET['t'])){ echo $_GET['t']; } ?>"><?php if(isset($_GET['msg'])){ echo $_GET['msg']; } ?></p>
                         <form action="./?op=validar" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="text" name="user" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                <label for="floatingInput">Usuario</label>
+                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Correo Electronico</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password">

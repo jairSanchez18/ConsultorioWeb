@@ -1,8 +1,23 @@
 <?php
 session_start();
 
+require_once 'model/medico.php';
+require_once 'model/expediente.php';
+require_once 'model/paciente.php';
+
 class Controller
 {
+    private $medicoModel;
+    private $expedienteModel;
+    private $pacientesModel;
+    private $resp;
+
+    public function __construct()
+    {
+        $this->medicoModel = new Medico();
+        $this->expedienteModel = new Expediente();
+        $this->pacientesModel = new Pacientes();
+    }
 
     public function login()
     {
@@ -21,22 +36,37 @@ class Controller
 
     public function contactenos()
     {
-        require('view/contactenos.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/contactenos.php");
+        }
     }
 
     public function error404()
     {
-        require('view/error404.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/error404.php");
+        }
     }
 
     public function validar()
     {
-        $usuario = $_REQUEST['user'];
-        $password = $_REQUEST['pass'];
+        $medico = new Medico();
 
-        if ($usuario == "keneth" && $password == "12345") {
-            $_SESSION["user"] = $usuario . " " . "Sanchez";
-            $_SESSION["acceso"] = true;
+        $medico->email = $_REQUEST['email'];
+        $medico->pass = $_REQUEST['pass'];
+
+        if ($resultado = $this->medicoModel->ValidarMedico($medico)) {
+            $_SESSION['id'] = $resultado->id_medico;
+
+            $datos = $this->medicoModel->Obtener($_SESSION['id']);
+            $_SESSION['acceso'] = true;
+            $_SESSION['user'] = $datos->nombre . " " . $datos->apellido;
             header('Location: ?op=acceder');
         } else {
             header('Location: ?op=login&msg=Usuario o contraseña Incorrecta&t=text-danger');
@@ -51,31 +81,141 @@ class Controller
 
     public function paciente()
     {
-        require('view/pacientes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            $Listapaciente = new Pacientes();
+            $Listapaciente = $this->pacientesModel->VerPacientes($_SESSION['id']);
+
+            require("view/pacientes.php");
+        }
     }
 
     public function reporte()
     {
-        require('view/reportes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/reportes.php");
+        }
     }
 
     public function expediente()
     {
-        require('view/expedientes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/expedientes.php");
+        }
+    }
+
+    public function GuardarExpediente()
+    {
+        $expediente = new Expediente();
+
+        $expediente->identificacion = rand(1, 100000);
+        $expediente->nombre = $_REQUEST['nombre'];
+        $expediente->apellido = $_REQUEST['apellido'];
+        $expediente->sexo = $_REQUEST['sexo'];
+        $expediente->cedula = $_REQUEST['cedula'];
+        $expediente->seguro = $_REQUEST['segurosocial'];
+        $expediente->telefono = $_REQUEST['telefono'];
+        $expediente->ingreso = $_REQUEST['ingreso'];
+        $expediente->servicio = $_REQUEST['servicio'];
+        $expediente->medico = $_REQUEST['medico'];
+        $expediente->enfermera = $_REQUEST['enfermera'];
+        $expediente->direccion = $_REQUEST['direccion'];
+        $expediente->cama = $_REQUEST['cama'];
+        $expediente->habitacion = $_REQUEST['habitacion'];
+        $expediente->procedencia = $_REQUEST['procedencia'];
+        $expediente->email = $_REQUEST['email'];
+        $expediente->nacimiento = $_REQUEST['nacimiento'];
+        $expediente->id_medico = $_SESSION['id'];
+
+        if($this->resp = $this->expedienteModel->CrearExpediente($expediente)){
+            header('Location: ?op=expediente&msg='.$this->resp);
+        }else{
+            header('Location: ?op=expediente&msg='.$this->resp);
+        }
     }
 
     public function expedientepac()
     {
-        require('view/expedientepac.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/expedientepac.php");
+        }
     }
 
     public function buscador()
     {
-        require('view/buscador.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/buscador.php");
+        }
     }
 
     public function perfil()
     {
-        require('view/perfil.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            $medico = $this->medicoModel->Obtener($_SESSION['id']);
+
+            require("view/perfil.php");
+        }
+    }
+
+    public function Actualizar()
+    {
+        $medico = new Medico();
+
+        $medico->nombre = $_REQUEST['nombre'];
+        $medico->apellido = $_REQUEST['apellido'];
+        $medico->sexo = $_REQUEST['sexo'];
+        $medico->email = $_REQUEST['email'];
+        $medico->nacimiento = $_REQUEST['nacimiento'];
+        $medico->telefono = $_REQUEST['telefono'];
+        $medico->id = $_SESSION['id'];
+
+        $mensaje = "&msg2=";
+
+        if ($this->medicoModel->VerificarCorreo($medico) <= 0) {
+            $this->medicoModel->ActualizarCorreo($medico);
+        }else{
+            $mensaje = "&msg2=El correo ya se encuentra en uso&t2=text-danger";
+        }
+
+        if ($this->resp = $this->medicoModel->ActualizarPerfil($medico)) {
+            $_SESSION['user'] = $_REQUEST['nombre'] . " " . $_REQUEST['apellido'];
+            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
+        }else{
+            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
+        }
+    }
+
+    public function ActualizarContraseña()
+    {
+        $medico = new Medico();
+
+        $medico->passold = $_REQUEST['passprincipal'];
+        $medico->passnueva =md5($_REQUEST['pass1']);
+        $medico->id = $_SESSION['id'];
+
+        if ($this->medicoModel->VerificarContraseña($medico) <= 0) {
+            header('Location: ?op=perfil&msg=La contraseña actual es incorrecta&t=text-danger');
+        }else{
+            $this->medicoModel->ActualizarContraseña($medico);
+            header('Location: ?op=perfil&msg=Contraseña actualizada&t=text-success');
+            
+        }
     }
 }

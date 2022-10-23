@@ -21,13 +21,19 @@ if (isset($_GET['op'])) {
         $controller->reporte();
     } else if ($opcion == "expediente") {
         $controller->expediente();
+    }else if ($opcion == "guardarexpediente") {
+        $controller->GuardarExpediente();
     } else if ($opcion == "perfil") {
         $controller->perfil();
     } else if ($opcion == "expedientepac") {
         $controller->expedientepac();
     } else if ($opcion == "buscador") {
         $controller->buscador();
-    } else {
+    } else if ($opcion == "actualizarperfil") {
+        $controller->Actualizar();
+    } else if ($opcion == "actualizarcontraseña") {
+        $controller->ActualizarContraseña();
+    }else {
         $controller->error404();
     }
 } else {
