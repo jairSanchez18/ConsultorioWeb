@@ -35,6 +35,8 @@ if (isset($_GET['op'])) {
         $controller->ActualizarContraseña();
     } else if ($opcion == "general") {
         $controller->InfoGeneral();
+    }else if ($opcion == "infoantecedente") {
+        $controller->GuardarAntecedente();
     } else {
         $controller->error404();
     }

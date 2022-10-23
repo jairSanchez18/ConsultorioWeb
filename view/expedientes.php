@@ -30,6 +30,9 @@
             <h3 class="h3"><i class="bi bi-journal-medical px-2"></i>Crear un nuevo expediente clinico</h3>
         </div>
         <hr class="mb-5">
+        <div class="text-start">
+                <p class="<?php if (isset($_GET['t'])) {echo $_GET['t'];} ?>"><?php if (isset($_GET['msg'])) {echo $_GET['msg'];} ?></p>
+        </div>
         <div class="bg-primary text-white p-2 fw-bold">
             <i class="bi bi-pencil-fill px-2"></i>Lleno los campos requeridos
         </div>
@@ -37,14 +40,7 @@
             <form action="./?op=guardarexpediente" method="POST">
                 <div class="grid-expediente">
                     <div class="expeA">
-                        <div class="text-start">
-                            <p class="<?php if (isset($_GET['t'])) {
-                                            echo $_GET['t'];
-                                        } ?>"><?php if (isset($_GET['msg'])) {
-                                                    echo $_GET['msg'];
-                                                } ?></p>
-                        </div>
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3 mt-3">
                             <input type="text" name="identificacion" class="form-control" id="floatingInput" placeholder="id" disabled>
                             <label for="floatingInput">Numero de Identificación</label>
                         </div>

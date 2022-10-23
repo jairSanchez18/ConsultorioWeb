@@ -43,7 +43,7 @@
         </div>
         <hr class="mb-5">
         <div class="text-start">
-            <p class="<?php if(isset($_GET['t'])){ echo $_GET['t']; } ?>"><?php if(isset($_GET['msg'])){ echo $_GET['msg']; } ?></p>
+            <p class="<?php if (isset($_GET['t'])) {echo $_GET['t'];} ?>"><?php if (isset($_GET['msg'])) {echo $_GET['msg'];} ?></p>
         </div>
         <div class="bg-primary text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Informacion del expediente
@@ -97,9 +97,9 @@
                                     <label for="floatingInput">Indicacion de procedencia (Opcional)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                            <input value="<?php echo $Datosexpediente->email; ?>" type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
-                            <label for="floatingInput">Correo electronico (Obligatorio)</label>
-                        </div>
+                                    <input value="<?php echo $Datosexpediente->email; ?>" type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
+                                    <label for="floatingInput">Correo electronico (Obligatorio)</label>
+                                </div>
                             </div>
                             <div class="expedB">
                                 <div class="form-floating mb-3">
@@ -162,33 +162,33 @@
                     </form>
                 </li>
                 <li>
-                    <form action="./?op=antec&pac=<?php echo $Datosexpediente->id ?>" method="POST">
+                    <form action="./?op=infoantecedente&pac=<?php echo $Datosexpediente->id ?>" method="POST">
                         <div class="grid-informacion">
                             <div class="expedA">
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="patologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->patologicos; ?></textarea>
+                                    <textarea class="form-control" name="patologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->patologicos; ?></textarea>
                                     <label for="floatingTextarea">Patologicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="nopatologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->no_patologicos; ?></textarea>
+                                    <textarea class="form-control" name="nopatologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->nopatologicos; ?></textarea>
                                     <label for="floatingTextarea">No Patologicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea  class="form-control" name="familiares" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->familiares; ?></textarea>
+                                    <textarea class="form-control" name="familiares" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->familiares; ?></textarea>
                                     <label for="floatingTextarea">Familiares</label>
                                 </div>
                             </div>
                             <div class="expedB">
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="quirurjicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->quirurgicos; ?></textarea>
+                                    <textarea class="form-control" name="cirugia" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->cirugia; ?></textarea>
                                     <label for="floatingTextarea">Quirurgicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="alergias" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->alergias; ?></textarea>
+                                    <textarea class="form-control" name="alergias" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->alergias; ?></textarea>
                                     <label for="floatingTextarea">Alergias</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="medicamentos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->medicamentos; ?></textarea>
+                                    <textarea class="form-control" name="medicamentos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->medicamentos; ?></textarea>
                                     <label for="floatingTextarea">Medicamentos</label>
                                 </div>
                             </div>

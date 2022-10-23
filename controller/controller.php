@@ -149,8 +149,45 @@ class Controller
             header('Location: ?op=login');
         } else {
             $Datosexpediente = new Expediente();
-            $Datosexpediente = $this->expedienteModel->VerExpediente($_GET['pac']);
+            $Datosantecedentes = new Expediente();
+            $Datosantec = new Expediente();
+
+            $Datosantecedentes->id_paciente = $_GET['pac'];
+
+            $Datosexpediente = $this->expedienteModel->VerExpediente($Datosantecedentes);
+
+            if ($this->expedienteModel->VerAntecedentes($Datosantecedentes)) {
+                $Datosantec = $this->expedienteModel->VerAntecedentes($Datosantecedentes);
+            }
+
+
             require("view/expedientepac.php");
+        }
+    }
+
+    public function GuardarAntecedente()
+    {
+        $antecedente = new Expediente();
+
+        $id_pac = $_GET['pac'];
+
+        $antecedente->id_paciente = $_GET['pac'];
+        $antecedente->patologicos = $_REQUEST['patologicos'];
+        $antecedente->nopatologicos = $_REQUEST['nopatologicos'];
+        $antecedente->cirugia = $_REQUEST['cirugia'];
+        $antecedente->familiares = $_REQUEST['familiares'];
+        $antecedente->medicamentos = $_REQUEST['medicamentos'];
+        $antecedente->alergias = $_REQUEST['alergias'];
+
+
+        if ($this->expedienteModel->VerAntecedentes($antecedente)) {
+            if ($resp = $this->expedienteModel->ActualizarAntecedente($antecedente)) {
+                header('Location: ?op=expedientepac&msg=' . $resp . '&pac=' . $id_pac);
+            }
+        } else {
+            if ($resp = $this->expedienteModel->GuardarAntecedente($antecedente)) {
+                header('Location: ?op=expedientepac&msg=' . $resp . '&pac=' . $id_pac);
+            }
         }
     }
 
