@@ -65,4 +65,51 @@ class Expediente{
             return $this->msg = "Error al crear el expediente del paciente&t=text-danger";
         }
     }
+
+    public function VerExpediente($idpaciente)
+    {
+        try {
+            $sql = "SELECT * FROM paciente WHERE id=?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($idpaciente));
+
+            return $stm->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function GuardarInfoGeneral(expediente $data)
+    {
+        try {
+            $sql = "UPDATE paciente SET nombre=?, apellido=?, sexo=?, seguro=?, procedencia=?, habitacion=?, telefono=?, 
+        ingreso=?, servicio=?, medico=?, enfermera=?, direccion=?, cama=?, email=?, nacimiento=? WHERE id=?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->nombre,
+                $data->apellido,
+                $data->sexo,
+                $data->seguro,
+                $data->procedencia,
+                $data->habitacion,
+                $data->telefono,
+                $data->ingreso,
+                $data->servicio,
+                $data->medico,
+                $data->enfermera,
+                $data->direccion,
+                $data->cama,
+                $data->email,
+                $data->nacimiento,
+                $data->id_pac
+            ));
+
+            return $this->msg = "Informacion general actualizada con exito&t=text-success";
+        } catch (Exception $e) {
+            die($e->getMessage());
+            return $this->msg = "Ocurrio un error al actualizar la informacion&t=text-danger";
+        }
+    }
 }

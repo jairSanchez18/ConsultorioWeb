@@ -135,10 +135,10 @@ class Controller
         $expediente->nacimiento = $_REQUEST['nacimiento'];
         $expediente->id_medico = $_SESSION['id'];
 
-        if($this->resp = $this->expedienteModel->CrearExpediente($expediente)){
-            header('Location: ?op=expediente&msg='.$this->resp);
-        }else{
-            header('Location: ?op=expediente&msg='.$this->resp);
+        if ($this->resp = $this->expedienteModel->CrearExpediente($expediente)) {
+            header('Location: ?op=expediente&msg=' . $this->resp);
+        } else {
+            header('Location: ?op=expediente&msg=' . $this->resp);
         }
     }
 
@@ -148,7 +148,38 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $Datosexpediente = new Expediente();
+            $Datosexpediente = $this->expedienteModel->VerExpediente($_GET['pac']);
             require("view/expedientepac.php");
+        }
+    }
+
+    public function InfoGeneral()
+    {
+
+        $expediente = new Expediente();
+
+        $id_pac = $_GET['pac'];
+
+        $expediente->nombre = $_REQUEST['nombre'];
+        $expediente->apellido = $_REQUEST['apellido'];
+        $expediente->sexo = $_REQUEST['sexo'];
+        $expediente->seguro = $_REQUEST['segurosocial'];
+        $expediente->telefono = $_REQUEST['telefono'];
+        $expediente->ingreso = $_REQUEST['ingreso'];
+        $expediente->servicio = $_REQUEST['servicio'];
+        $expediente->medico = $_REQUEST['medico'];
+        $expediente->enfermera = $_REQUEST['enfermera'];
+        $expediente->direccion = $_REQUEST['direccion'];
+        $expediente->cama = $_REQUEST['cama'];
+        $expediente->habitacion = $_REQUEST['habitacion'];
+        $expediente->procedencia = $_REQUEST['procedencia'];
+        $expediente->email = $_REQUEST['email'];
+        $expediente->nacimiento = $_REQUEST['nacimiento'];
+        $expediente->id_pac = $_GET['pac'];
+
+        if ($this->resp = $this->expedienteModel->GuardarInfoGeneral($expediente)) {
+            header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
         }
     }
 
@@ -190,15 +221,15 @@ class Controller
 
         if ($this->medicoModel->VerificarCorreo($medico) <= 0) {
             $this->medicoModel->ActualizarCorreo($medico);
-        }else{
+        } else {
             $mensaje = "&msg2=El correo ya se encuentra en uso&t2=text-danger";
         }
 
         if ($this->resp = $this->medicoModel->ActualizarPerfil($medico)) {
             $_SESSION['user'] = $_REQUEST['nombre'] . " " . $_REQUEST['apellido'];
-            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
-        }else{
-            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
+            header('Location: ?op=perfil&msg=' . $this->resp . $mensaje);
+        } else {
+            header('Location: ?op=perfil&msg=' . $this->resp . $mensaje);
         }
     }
 
@@ -207,15 +238,14 @@ class Controller
         $medico = new Medico();
 
         $medico->passold = $_REQUEST['passprincipal'];
-        $medico->passnueva =md5($_REQUEST['pass1']);
+        $medico->passnueva = md5($_REQUEST['pass1']);
         $medico->id = $_SESSION['id'];
 
         if ($this->medicoModel->VerificarContraseña($medico) <= 0) {
             header('Location: ?op=perfil&msg=La contraseña actual es incorrecta&t=text-danger');
-        }else{
+        } else {
             $this->medicoModel->ActualizarContraseña($medico);
             header('Location: ?op=perfil&msg=Contraseña actualizada&t=text-success');
-            
         }
     }
 }
