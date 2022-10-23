@@ -6,6 +6,7 @@ require_once 'model/medico.php';
 class Controller
 {
     private $medicoModel;
+    private $resp;
 
     public function __construct()
     {
@@ -56,10 +57,10 @@ class Controller
 
         if ($resultado = $this->medicoModel->ValidarMedico($medico)) {
             $_SESSION['id'] = $resultado->id_medico;
-            
+
             $datos = $this->medicoModel->Obtener($_SESSION['id']);
             $_SESSION['acceso'] = true;
-            $_SESSION['user'] = $datos->nombre." ".$datos->apellido;
+            $_SESSION['user'] = $datos->nombre . " " . $datos->apellido;
             header('Location: ?op=acceder');
         } else {
             header('Location: ?op=login&msg=Usuario o contraseña Incorrecta&t=text-danger');
@@ -128,7 +129,52 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $medico = $this->medicoModel->Obtener($_SESSION['id']);
+
             require("view/perfil.php");
+        }
+    }
+
+    public function Actualizar()
+    {
+        $medico = new Medico();
+
+        $medico->nombre = $_REQUEST['nombre'];
+        $medico->apellido = $_REQUEST['apellido'];
+        $medico->sexo = $_REQUEST['sexo'];
+        $medico->email = $_REQUEST['email'];
+        $medico->nacimiento = $_REQUEST['nacimiento'];
+        $medico->telefono = $_REQUEST['telefono'];
+        $medico->id = $_SESSION['id'];
+
+        $mensaje = "&msg2=";
+
+        if ($this->medicoModel->VerificarCorreo($medico) <= 0) {
+            $this->medicoModel->ActualizarCorreo($medico);
+        }else{
+            $mensaje = "&msg2=El correo ya se encuentra en uso&t2=text-danger";
+        }
+
+        if ($this->resp = $this->medicoModel->ActualizarPerfil($medico)) {
+            $_SESSION['user'] = $_REQUEST['nombre'] . " " . $_REQUEST['apellido'];
+            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
+        }
+    }
+
+    public function ActualizarContraseña()
+    {
+        $medico = new Medico();
+
+        $medico->passold = $_REQUEST['passprincipal'];
+        $medico->passnueva = $_REQUEST['pass1'];
+        $medico->id = $_SESSION['id'];
+
+        if ($this->medicoModel->VerificarContraseña($medico) <= 0) {
+            header('Location: ?op=perfil&msg=La contraseña actual es incorrecta&t=text-danger');
+        }else{
+            $this->medicoModel->ActualizarContraseña($medico);
+            header('Location: ?op=perfil&msg=Contraseña actualizada&t=text-success');
+            
         }
     }
 }

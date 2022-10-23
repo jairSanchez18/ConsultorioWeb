@@ -27,6 +27,10 @@ if (isset($_GET['op'])) {
         $controller->expedientepac();
     } else if ($opcion == "buscador") {
         $controller->buscador();
+    } else if ($opcion == "actualizarperfil") {
+        $controller->Actualizar();
+    } else if ($opcion == "actualizarcontraseña") {
+        $controller->ActualizarContraseña();
     } else {
         $controller->error404();
     }
