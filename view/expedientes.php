@@ -34,9 +34,12 @@
             <i class="bi bi-pencil-fill px-2"></i>Lleno los campos requeridos
         </div>
         <div class="border p-2">
-            <form action="#" method="POST">
+            <form action="./?op=guardarexpediente" method="POST">
                 <div class="grid-expediente">
                     <div class="expeA">
+                    <div class="text-start">
+                        <p class="<?php if(isset($_GET['t'])){ echo $_GET['t']; } ?>"><?php if(isset($_GET['msg'])){ echo $_GET['msg']; } ?></p>
+                    </div>
                         <div class="form-floating mb-3">
                             <input type="text" name="identificacion" class="form-control" id="floatingInput" placeholder="id" disabled>
                             <label for="floatingInput">Numero de Identificación</label>
@@ -98,6 +101,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
+                    <label for="floatingInput">Correo electronico (Obligatorio)</label>
+                </div>
                 <label for="" class="text-danger px-2">En caso de quedarse</label>
                 <div class="form-floating mb-3">
                     <input type="text" name="cama" class="form-control" id="floatingInput" placeholder="cama">
@@ -110,7 +117,7 @@
                 </div>
                 <label for="" class="text-danger px-2">Si proviene de otro centro medico</label>
                 <div class="form-floating mb-3">
-                    <input type="text" name="procedencia" class="form-control" id="floatingInput" placeholder="direccion" required>
+                    <input type="text" name="procedencia" class="form-control" id="floatingInput" placeholder="direccion">
                     <label for="floatingInput">Indicacion de procedencia (Opcional)</label>
                 </div>
                 <div class="entrar d-grid gap-2">

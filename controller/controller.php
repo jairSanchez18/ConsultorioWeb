@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'model/medico.php';
+require_once 'model/expediente.php';
 
 class Controller
 {
@@ -11,6 +12,7 @@ class Controller
     public function __construct()
     {
         $this->medicoModel = new Medico();
+        $this->expedienteModel = new Expediente();
     }
 
     public function login()
@@ -103,6 +105,35 @@ class Controller
         }
     }
 
+    public function GuardarExpediente()
+    {
+        $expediente = new Expediente();
+
+        $expediente->identificacion = rand(1, 100000);
+        $expediente->nombre = $_REQUEST['nombre'];
+        $expediente->apellido = $_REQUEST['apellido'];
+        $expediente->sexo = $_REQUEST['sexo'];
+        $expediente->cedula = $_REQUEST['cedula'];
+        $expediente->seguro = $_REQUEST['segurosocial'];
+        $expediente->telefono = $_REQUEST['telefono'];
+        $expediente->ingreso = $_REQUEST['ingreso'];
+        $expediente->servicio = $_REQUEST['servicio'];
+        $expediente->medico = $_REQUEST['medico'];
+        $expediente->enfermera = $_REQUEST['enfermera'];
+        $expediente->direccion = $_REQUEST['direccion'];
+        $expediente->cama = $_REQUEST['cama'];
+        $expediente->habitacion = $_REQUEST['habitacion'];
+        $expediente->procedencia = $_REQUEST['procedencia'];
+        $expediente->email = $_REQUEST['email'];
+        $expediente->id_medico = $_SESSION['id'];
+
+        if($this->resp = $this->expedienteModel->CrearExpediente($expediente)){
+            header('Location: ?op=expediente&msg='.$this->resp);
+        }else{
+            header('Location: ?op=expediente&msg='.$this->resp);
+        }
+    }
+
     public function expedientepac()
     {
         if ($_SESSION["acceso"] != true) {
@@ -166,7 +197,7 @@ class Controller
         $medico = new Medico();
 
         $medico->passold = $_REQUEST['passprincipal'];
-        $medico->passnueva = $_REQUEST['pass1'];
+        $medico->passnueva =md5($_REQUEST['pass1']);
         $medico->id = $_SESSION['id'];
 
         if ($this->medicoModel->VerificarContraseña($medico) <= 0) {
