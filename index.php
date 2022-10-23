@@ -21,7 +21,7 @@ if (isset($_GET['op'])) {
         $controller->reporte();
     } else if ($opcion == "expediente") {
         $controller->expediente();
-    }else if ($opcion == "guardarexpediente") {
+    } else if ($opcion == "guardarexpediente") {
         $controller->GuardarExpediente();
     } else if ($opcion == "perfil") {
         $controller->perfil();
@@ -33,7 +33,9 @@ if (isset($_GET['op'])) {
         $controller->Actualizar();
     } else if ($opcion == "actualizarcontraseña") {
         $controller->ActualizarContraseña();
-    }else {
+    } else if ($opcion == "general") {
+        $controller->InfoGeneral();
+    } else {
         $controller->error404();
     }
 } else {
