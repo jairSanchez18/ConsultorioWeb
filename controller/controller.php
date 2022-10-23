@@ -1,8 +1,16 @@
 <?php
 session_start();
 
+require_once 'model/medico.php';
+
 class Controller
 {
+    private $medicoModel;
+
+    public function __construct()
+    {
+        $this->medicoModel = new Medico();
+    }
 
     public function login()
     {
@@ -21,22 +29,37 @@ class Controller
 
     public function contactenos()
     {
-        require('view/contactenos.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/contactenos.php");
+        }
     }
 
     public function error404()
     {
-        require('view/error404.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/error404.php");
+        }
     }
 
     public function validar()
     {
-        $usuario = $_REQUEST['user'];
-        $password = $_REQUEST['pass'];
+        $medico = new Medico();
 
-        if ($usuario == "keneth" && $password == "12345") {
-            $_SESSION["user"] = $usuario . " " . "Sanchez";
-            $_SESSION["acceso"] = true;
+        $medico->email = $_REQUEST['email'];
+        $medico->pass = $_REQUEST['pass'];
+
+        if ($resultado = $this->medicoModel->ValidarMedico($medico)) {
+            $_SESSION['id'] = $resultado->id_medico;
+            
+            $datos = $this->medicoModel->Obtener($_SESSION['id']);
+            $_SESSION['acceso'] = true;
+            $_SESSION['user'] = $datos->nombre." ".$datos->apellido;
             header('Location: ?op=acceder');
         } else {
             header('Location: ?op=login&msg=Usuario o contraseña Incorrecta&t=text-danger');
@@ -51,31 +74,61 @@ class Controller
 
     public function paciente()
     {
-        require('view/pacientes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/pacientes.php");
+        }
     }
 
     public function reporte()
     {
-        require('view/reportes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/reportes.php");
+        }
     }
 
     public function expediente()
     {
-        require('view/expedientes.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/expedientes.php");
+        }
     }
 
     public function expedientepac()
     {
-        require('view/expedientepac.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/expedientepac.php");
+        }
     }
 
     public function buscador()
     {
-        require('view/buscador.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/buscador.php");
+        }
     }
 
     public function perfil()
     {
-        require('view/perfil.php');
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            require("view/perfil.php");
+        }
     }
 }
