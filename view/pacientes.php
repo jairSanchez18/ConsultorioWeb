@@ -7,11 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de pacientes</title>
 
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/estilos.css">
-    <script src="public/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit-icons.min.js"></script>
 
+
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <script src="public/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="public/css/estilos.css">
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        header .nav-item a {
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,8 +37,8 @@
         ?>
     </header>
     <div class="container mb-5">
-        <div class="text-primary mt-5">
-            <h3 class="h3"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes</h3>
+        <div class="mt-5">
+            <h3 class="h3 text-primary"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes</h3>
         </div>
         <hr class="mb-5">
         <div class="bg-primary text-white p-2 fw-bold">
@@ -38,65 +54,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Juan</td>
-                    <td>Sapata</td>
-                    <td>Nacimiento: 15 de septiembre de 1998 <br>
-                        Edad: 24 Años <br>
-                        Email: Juan@Correo.com</td>
-                    <td class="text-center">
-                        <div class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle font-opciones" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Opciones Generales
-                            </button>
-                            <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="./?op=expedientepac">Ver el expediente clinico</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan</td>
-                    <td>Sapata</td>
-                    <td>Nacimiento: 15 de septiembre de 1998 <br>
-                        Edad: 24 Años <br>
-                        Email: Juan@Correo.com</td>
-                    <td class="text-center">
-                        <div class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle font-opciones" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Opciones Generales
-                            </button>
-                            <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="#">Ver el paciente</a></li>
-                                <li><a class="dropdown-item" href="#">Crear una cita nueva</a></li>
-                                <li><a class="dropdown-item" href="#">Crear una consulta nueva</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Juan</td>
-                    <td>Sapata</td>
-                    <td>Nacimiento: 15 de septiembre de 1998 <br>
-                        Edad: 24 Años <br>
-                        Email: Juan@Correo.com</td>
-                    <td class="text-center">
-                        <div class="dropdown">
-                            <button class="btn btn-warning dropdown-toggle font-opciones" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Opciones Generales
-                            </button>
-                            <ul class="dropdown-menu font-opciones">
-                                <li><a class="dropdown-item" href="#">Ver el paciente</a></li>
-                                <li><a class="dropdown-item" href="#">Crear una cita nueva</a></li>
-                                <li><a class="dropdown-item" href="#">Crear una consulta nueva</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                <?php foreach ($Listapaciente as $p) { ?>
+                    <tr>
+                        <td><?php echo $p->nombre ?></td>
+                        <td><?php echo $p->apellido ?></td>
+                        <td>Nacimiento: <?php echo $p->nacimiento ?> <br>
+                            Edad: <?php echo $p->edad ?> Años <br>
+                            Email: <?php echo $p->email ?></td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <button class="btn btn-warning dropdown-toggle font-opciones" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Opciones Generales
+                                </button>
+                                <ul class="dropdown-menu font-opciones">
+                                    <li><a class="dropdown-item" style="text-decoration: none;" href="./?op=expedientepac&pac=<?php echo $p->id ?>">Ver el expediente clinico</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
-    <footer>
+    <footer uk-sticky="position: bottom">
         <?php
         require_once('template/footer.php');
         ?>

@@ -34,8 +34,8 @@ class Expediente{
     public function CrearExpediente(expediente $data){
         try{
             $sql = "INSERT INTO paciente (id_medico, nombre, apellido, sexo, cedula,
-            seguro, procedencia, habitacion, telefono, ingreso, servicio, medico, enfermera, direccion, cama, identificacion, emaail)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            seguro, procedencia, habitacion, telefono, ingreso, servicio, medico, enfermera, direccion, cama, identificacion, email, nacimiento)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array(
@@ -55,7 +55,8 @@ class Expediente{
                 $data->direccion,
                 $data->cama,
                 $data->identificacion,
-                $data->email
+                $data->email,
+                $data->nacimiento
             ));
     
             return $this->msg = "El expediente del paciente fue creado con exito&t=text-success";

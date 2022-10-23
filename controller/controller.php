@@ -3,16 +3,20 @@ session_start();
 
 require_once 'model/medico.php';
 require_once 'model/expediente.php';
+require_once 'model/paciente.php';
 
 class Controller
 {
     private $medicoModel;
+    private $expedienteModel;
+    private $pacientesModel;
     private $resp;
 
     public function __construct()
     {
         $this->medicoModel = new Medico();
         $this->expedienteModel = new Expediente();
+        $this->pacientesModel = new Pacientes();
     }
 
     public function login()
@@ -81,6 +85,9 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $Listapaciente = new Pacientes();
+            $Listapaciente = $this->pacientesModel->VerPacientes($_SESSION['id']);
+
             require("view/pacientes.php");
         }
     }
@@ -125,6 +132,7 @@ class Controller
         $expediente->habitacion = $_REQUEST['habitacion'];
         $expediente->procedencia = $_REQUEST['procedencia'];
         $expediente->email = $_REQUEST['email'];
+        $expediente->nacimiento = $_REQUEST['nacimiento'];
         $expediente->id_medico = $_SESSION['id'];
 
         if($this->resp = $this->expedienteModel->CrearExpediente($expediente)){
@@ -188,6 +196,8 @@ class Controller
 
         if ($this->resp = $this->medicoModel->ActualizarPerfil($medico)) {
             $_SESSION['user'] = $_REQUEST['nombre'] . " " . $_REQUEST['apellido'];
+            header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
+        }else{
             header('Location: ?op=perfil&msg=' . $this->resp.$mensaje);
         }
     }

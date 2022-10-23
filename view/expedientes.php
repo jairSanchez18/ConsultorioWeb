@@ -37,9 +37,13 @@
             <form action="./?op=guardarexpediente" method="POST">
                 <div class="grid-expediente">
                     <div class="expeA">
-                    <div class="text-start">
-                        <p class="<?php if(isset($_GET['t'])){ echo $_GET['t']; } ?>"><?php if(isset($_GET['msg'])){ echo $_GET['msg']; } ?></p>
-                    </div>
+                        <div class="text-start">
+                            <p class="<?php if (isset($_GET['t'])) {
+                                            echo $_GET['t'];
+                                        } ?>"><?php if (isset($_GET['msg'])) {
+                                                    echo $_GET['msg'];
+                                                } ?></p>
+                        </div>
                         <div class="form-floating mb-3">
                             <input type="text" name="identificacion" class="form-control" id="floatingInput" placeholder="id" disabled>
                             <label for="floatingInput">Numero de Identificación</label>
@@ -67,8 +71,12 @@
                             <input type="text" name="segurosocial" class="form-control" id="floatingInput" placeholder="seguro social">
                             <label for="floatingInput">Seguro social (Opcional)</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" name="nacimiento" class="form-control" id="floatingInput" placeholder="direccion" required>
+                            <label for="floatingInput">Fecha de Nacimiento (Obligatorio)</label>
+                        </div>
                     </div>
-                    <div class="expeB">
+                    <div class="expeB mt-3">
                         <div class="form-floating mb-3">
                             <input type="text" name="telefono" class="form-control" id="floatingInput" placeholder="telefono" required>
                             <label for="floatingInput">Telefono celular (Obligatorio)</label>
@@ -99,11 +107,11 @@
                             <input type="text" name="direccion" class="form-control" id="floatingInput" placeholder="direccion" required>
                             <label for="floatingInput">Direccion de domicilio (Obligatorio)</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
+                            <label for="floatingInput">Correo electronico (Obligatorio)</label>
+                        </div>
                     </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
-                    <label for="floatingInput">Correo electronico (Obligatorio)</label>
                 </div>
                 <label for="" class="text-danger px-2">En caso de quedarse</label>
                 <div class="form-floating mb-3">

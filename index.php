@@ -33,7 +33,7 @@ if (isset($_GET['op'])) {
         $controller->Actualizar();
     } else if ($opcion == "actualizarcontraseña") {
         $controller->ActualizarContraseña();
-    } else {
+    }else {
         $controller->error404();
     }
 } else {
