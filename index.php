@@ -37,7 +37,9 @@ if (isset($_GET['op'])) {
         $controller->InfoGeneral();
     }else if ($opcion == "infoantecedente") {
         $controller->GuardarAntecedente();
-    } else {
+    }else if ($opcion == "crearconsulta") {
+        $controller->CrearConsulta();
+    }  else {
         $controller->error404();
     }
 } else {

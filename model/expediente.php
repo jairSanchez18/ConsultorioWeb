@@ -29,6 +29,18 @@ class Expediente
     public $medicamentos;
     public $cirugia;
 
+    public $id_paciente;
+    public $comienzo;
+    public $finalizacion;
+    public $lugar;
+    public $motivo;
+    public $examen;
+    public $diagnostico;
+    public $recomendaciones;
+    public $receta;
+    public $observaciones;
+    public $id_medico;
+
     public function __construct()
     {
         try {
@@ -152,14 +164,14 @@ class Expediente
                 $data->medicamentos,
                 $data->id_paciente
             ));
-            
+
             return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
         } catch (Exception $e) {
             die($e->getMessage());
             return $this->msg = "Error al actualizar los antecedentes del paciente&t=text-danger";
         }
     }
-    
+
     public function GuardarAntecedente(expediente $data)
     {
         try {
@@ -176,11 +188,57 @@ class Expediente
                 $data->familiares,
                 $data->medicamentos
             ));
-            
-           return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
+
+            return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
         } catch (Exception $e) {
             die($e->getMessage());
             return $this->msg = "Error al actualizar los antecedentes del paciente&t=text-danger";
+        }
+    }
+
+    public function CrearConsulta(expediente $data)
+    {
+        try {
+            $sql = "INSERT INTO consulta (id_paciente, comienzo, finalizacion, lugar, motivo, examen, diagnostico, recomendaciones, receta, observaciones)
+            VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id_paciente,
+                $data->comienzo,
+                $data->finalizacion,
+                $data->lugar,
+                $data->motivo,
+                $data->examen,
+                $data->diagnostico,
+                $data->recomendaciones,
+                $data->receta,
+                $data->observaciones
+            ));
+
+            return $this->msg = "Consulta creada con exito&t=text-success";
+        } catch (Exception $e) {
+            die($e->getMessage());
+            return $this->msg = "Error al crear la consulta, verifique nuevamente&t=text-danger";
+        }
+    }
+
+    //FALTA ARREGLAR
+    public function VerConsulta(expediente $data)
+    {
+        try {
+            $sql = "SELECT id_paciente, comienzo, finalizacion, lugar, motivo, examen, diagnostico, recomendaciones,
+            receta, observaciones, p.nombre, p.apellido
+            from consulta as c
+            join paciente as p on c.id_paciente = p.id
+            join medico as m where m.id = ? and id_paciente = ?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($data->id_medico, $data->id_paciente));
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
         }
     }
 }
