@@ -35,7 +35,11 @@ if (isset($_GET['op'])) {
         $controller->ActualizarContraseña();
     } else if ($opcion == "general") {
         $controller->InfoGeneral();
-    } else {
+    }else if ($opcion == "infoantecedente") {
+        $controller->GuardarAntecedente();
+    }else if ($opcion == "crearconsulta") {
+        $controller->CrearConsulta();
+    }  else {
         $controller->error404();
     }
 } else {

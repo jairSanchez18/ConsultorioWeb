@@ -43,7 +43,7 @@
         </div>
         <hr class="mb-5">
         <div class="text-start">
-            <p class="<?php if(isset($_GET['t'])){ echo $_GET['t']; } ?>"><?php if(isset($_GET['msg'])){ echo $_GET['msg']; } ?></p>
+            <p class="<?php if (isset($_GET['t'])) {echo $_GET['t'];} ?>"><?php if (isset($_GET['msg'])) {echo $_GET['msg'];} ?></p>
         </div>
         <div class="bg-primary text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Informacion del expediente
@@ -97,9 +97,9 @@
                                     <label for="floatingInput">Indicacion de procedencia (Opcional)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                            <input value="<?php echo $Datosexpediente->email; ?>" type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
-                            <label for="floatingInput">Correo electronico (Obligatorio)</label>
-                        </div>
+                                    <input value="<?php echo $Datosexpediente->email; ?>" type="email" name="email" class="form-control" id="floatingInput" placeholder="direccion" required>
+                                    <label for="floatingInput">Correo electronico (Obligatorio)</label>
+                                </div>
                             </div>
                             <div class="expedB">
                                 <div class="form-floating mb-3">
@@ -162,33 +162,33 @@
                     </form>
                 </li>
                 <li>
-                    <form action="./?op=antec&pac=<?php echo $Datosexpediente->id ?>" method="POST">
+                    <form action="./?op=infoantecedente&pac=<?php echo $Datosexpediente->id ?>" method="POST">
                         <div class="grid-informacion">
                             <div class="expedA">
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="patologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->patologicos; ?></textarea>
+                                    <textarea class="form-control" name="patologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->patologicos; ?></textarea>
                                     <label for="floatingTextarea">Patologicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="nopatologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->no_patologicos; ?></textarea>
+                                    <textarea class="form-control" name="nopatologicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->nopatologicos; ?></textarea>
                                     <label for="floatingTextarea">No Patologicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea  class="form-control" name="familiares" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->familiares; ?></textarea>
+                                    <textarea class="form-control" name="familiares" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->familiares; ?></textarea>
                                     <label for="floatingTextarea">Familiares</label>
                                 </div>
                             </div>
                             <div class="expedB">
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="quirurjicos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->quirurgicos; ?></textarea>
+                                    <textarea class="form-control" name="cirugia" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->cirugia; ?></textarea>
                                     <label for="floatingTextarea">Quirurgicos</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="alergias" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->alergias; ?></textarea>
+                                    <textarea class="form-control" name="alergias" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->alergias; ?></textarea>
                                     <label for="floatingTextarea">Alergias</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="medicamentos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantecedentes->medicamentos; ?></textarea>
+                                    <textarea class="form-control" name="medicamentos" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"><?php echo $Datosantec->medicamentos; ?></textarea>
                                     <label for="floatingTextarea">Medicamentos</label>
                                 </div>
                             </div>
@@ -199,7 +199,7 @@
                     </form>
                 </li>
                 <li>
-                    <form action="#" method="POST">
+                    <form action="./?op=crearconsulta&pac=<?php echo $Datosexpediente->id ?>" method="POST">
                         <div class="grid-expediente lista-consulta">
                             <div class="expeA">
                                 <div class="bg-dark text-white p-2 fw-bold mb-3">
@@ -210,7 +210,7 @@
                                     <label for="floatingInput">Comienzo (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="datetime-local" name="final" class="form-control" id="floatingInput" placeholder="Nombre" required>
+                                    <input type="datetime-local" name="finalizacion" class="form-control" id="floatingInput" placeholder="Nombre" required>
                                     <label for="floatingInput">Finalizacion (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -226,7 +226,7 @@
                                     <label for="floatingTextarea">Motivo de la Consulta (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="examenfisico" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <textarea class="form-control" name="examen" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
                                     <label for="floatingTextarea">Examen Fisico (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -234,7 +234,7 @@
                                     <label for="floatingTextarea">Diagnostico (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="recomendacion" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <textarea class="form-control" name="recomendaciones" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
                                     <label for="floatingTextarea">Recomendaciones (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -242,7 +242,7 @@
                                     <label for="floatingTextarea">Receta (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="observacion" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"></textarea>
+                                    <textarea class="form-control" name="observaciones" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;"></textarea>
                                     <label for="floatingTextarea">Observaciones (Opcional)</label>
                                 </div>
 
@@ -256,20 +256,17 @@
                                         <tr>
                                             <th>Paciente</th>
                                             <th>Motivo</th>
-                                            <th>Fecha de cita</th>
+                                            <th>Fecha de consulta</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach($Datosconsulta as $lc) { ?>
                                         <tr>
-                                            <td>Juan Sapata</td>
-                                            <td>Dolores Musculares</td>
-                                            <td>22/11/2022</td>
+                                            <td><?php echo $lc->nombre." ".$lc->apellido; ?></td>
+                                            <td><?php echo $lc->motivo; ?></td>
+                                            <td><?php echo $lc->comienzo; ?>2</td>
                                         </tr>
-                                        <tr>
-                                            <td>Juan Sapata</td>
-                                            <td>Radiografía</td>
-                                            <td>01/02/2023</td>
-                                        </tr>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -291,11 +288,11 @@
                                     <label for="floatingInput">Comienzo (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="datetime-local" name="final" class="form-control" id="floatingInput" placeholder="Nombre" required>
+                                    <input type="datetime-local" name="finalizacion" class="form-control" id="floatingInput" placeholder="Nombre" required>
                                     <label for="floatingInput">Finalizacion (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="actividad" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
+                                    <textarea class="form-control" name="motivo" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
                                     <label for="floatingTextarea">Motivo (Obligatorio)</label>
                                 </div>
 

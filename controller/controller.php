@@ -10,6 +10,7 @@ class Controller
     private $medicoModel;
     private $expedienteModel;
     private $pacientesModel;
+    private $consultaModel;
     private $resp;
 
     public function __construct()
@@ -59,7 +60,7 @@ class Controller
         $medico = new Medico();
 
         $medico->email = $_REQUEST['email'];
-        $medico->pass = $_REQUEST['pass'];
+        $medico->pass = md5($_REQUEST['pass']);
 
         if ($resultado = $this->medicoModel->ValidarMedico($medico)) {
             $_SESSION['id'] = $resultado->id_medico;
@@ -148,9 +149,51 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $Datosantecedentes = new Expediente();
+
+            $Datosantecedentes->id_paciente = $_GET['pac'];
+            $Datosantecedentes->id_medico = $_SESSION['id'];
+
+            $Datosconsulta = new Expediente();
+            $Datosconsulta = $this->expedienteModel->VerConsulta($Datosantecedentes);
+
             $Datosexpediente = new Expediente();
-            $Datosexpediente = $this->expedienteModel->VerExpediente($_GET['pac']);
+            $Datosexpediente = $this->expedienteModel->VerExpediente($Datosantecedentes);
+
+            $Datosantec = new Expediente();
+            if($this->expedienteModel->VerAntecedentes($Datosantecedentes)){
+                $Datosantec = $this->expedienteModel->VerAntecedentes($Datosantecedentes);
+            }
+
+            
+
             require("view/expedientepac.php");
+        }
+    }
+
+    public function GuardarAntecedente()
+    {
+        $antecedente = new Expediente();
+
+        $id_pac = $_GET['pac'];
+
+        $antecedente->id_paciente = $_GET['pac'];
+        $antecedente->patologicos = $_REQUEST['patologicos'];
+        $antecedente->nopatologicos = $_REQUEST['nopatologicos'];
+        $antecedente->cirugia = $_REQUEST['cirugia'];
+        $antecedente->familiares = $_REQUEST['familiares'];
+        $antecedente->medicamentos = $_REQUEST['medicamentos'];
+        $antecedente->alergias = $_REQUEST['alergias'];
+
+
+        if ($this->expedienteModel->VerAntecedentes($antecedente)) {
+            if ($resp = $this->expedienteModel->ActualizarAntecedente($antecedente)) {
+                header('Location: ?op=expedientepac&msg=' . $resp . '&pac=' . $id_pac);
+            }
+        } else {
+            if ($resp = $this->expedienteModel->GuardarAntecedente($antecedente)) {
+                header('Location: ?op=expedientepac&msg=' . $resp . '&pac=' . $id_pac);
+            }
         }
     }
 
@@ -179,6 +222,28 @@ class Controller
         $expediente->id_pac = $_GET['pac'];
 
         if ($this->resp = $this->expedienteModel->GuardarInfoGeneral($expediente)) {
+            header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
+        }
+    }
+
+    public function CrearConsulta()
+    {
+        $consulta = new Expediente();
+
+        $id_pac = $_GET['pac'];
+
+        $consulta->comienzo = $_REQUEST['comienzo'];
+        $consulta->finalizacion = $_REQUEST['finalizacion'];
+        $consulta->lugar = $_REQUEST['lugar'];
+        $consulta->motivo = $_REQUEST['motivo'];
+        $consulta->examen = $_REQUEST['examen'];
+        $consulta->diagnostico = $_REQUEST['diagnostico'];
+        $consulta->recomendaciones = $_REQUEST['recomendaciones'];
+        $consulta->receta = $_REQUEST['receta'];
+        $consulta->observaciones = $_REQUEST['observaciones'];
+        $consulta->id_paciente = $id_pac;
+
+        if ($this->resp = $this->expedienteModel->CrearConsulta($consulta)) {
             header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
         }
     }
