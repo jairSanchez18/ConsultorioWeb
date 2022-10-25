@@ -54,16 +54,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Juan Sapata</td>
-                        <td>X-XXX-XXX</td>
-                        <td class="text-center"><a href="./?op=expedientepac" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>Pedro Suira</td>
-                        <td>X-XXX-XXX</td>
-                        <td class="text-center"><a href="#" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
-                    </tr>
+                    <?php foreach ($Busqueda as $lc) { ?>
+                        <tr>
+                            <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
+                            <td><?php echo $lc->cedula; ?></td>
+                            <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

@@ -43,7 +43,11 @@
         </div>
         <hr class="mb-5">
         <div class="text-start">
-            <p class="<?php if (isset($_GET['t'])) {echo $_GET['t'];} ?>"><?php if (isset($_GET['msg'])) {echo $_GET['msg'];} ?></p>
+            <p class="<?php if (isset($_GET['t'])) {
+                            echo $_GET['t'];
+                        } ?>"><?php if (isset($_GET['msg'])) {
+                                                                                echo $_GET['msg'];
+                                                                            } ?></p>
         </div>
         <div class="bg-primary text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Informacion del expediente
@@ -260,13 +264,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($Datosconsulta as $lc) { ?>
-                                        <tr>
-                                            <td><?php echo $lc->nombre." ".$lc->apellido; ?></td>
-                                            <td><?php echo $lc->motivo; ?></td>
-                                            <td><?php echo $lc->comienzo; ?>2</td>
-                                        </tr>
-                                        <?php }?>
+                                        <?php foreach ($Datosconsulta as $lc) { ?>
+                                            <tr>
+                                                <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
+                                                <td><?php echo $lc->motivo; ?></td>
+                                                <td><?php echo $lc->comienzo; ?>2</td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -277,7 +281,7 @@
                     </form>
                 </li>
                 <li>
-                    <form action="#" method="POST">
+                    <form action="./?op=crearcita&pac=<?php echo $Datosexpediente->id ?>" method="POST">
                         <div class="grid-expediente lista-consulta">
                             <div class="expeA">
                                 <div class="bg-dark text-white p-2 fw-bold mb-3">
@@ -285,11 +289,7 @@
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="datetime-local" name="comienzo" class="form-control" id="floatingInput" placeholder="id" required>
-                                    <label for="floatingInput">Comienzo (Obligatorio)</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="datetime-local" name="finalizacion" class="form-control" id="floatingInput" placeholder="Nombre" required>
-                                    <label for="floatingInput">Finalizacion (Obligatorio)</label>
+                                    <label for="floatingInput">Fecha de cita asignada (Obligatorio)</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control" name="motivo" placeholder="Leave a comment here" id="floatingTextarea" style="height: 120px;" required></textarea>
@@ -306,20 +306,17 @@
                                         <tr>
                                             <th>Paciente</th>
                                             <th>Motivo</th>
-                                            <th>Fecha de cita</th>
+                                            <th>Fecha de cita asignada</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Juan Sapata</td>
-                                            <td>Dolores Musculares</td>
-                                            <td>22/11/2022</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Juan Sapata</td>
-                                            <td>Radiografía</td>
-                                            <td>01/02/2023</td>
-                                        </tr>
+                                        <?php foreach ($Datoscita as $lc) { ?>
+                                            <tr>
+                                                <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
+                                                <td><?php echo $lc->motivo; ?></td>
+                                                <td><?php echo $lc->comienzo; ?>2</td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
