@@ -223,15 +223,14 @@ class Expediente
         }
     }
 
-    //FALTA ARREGLAR
     public function VerConsulta(expediente $data)
     {
         try {
-            $sql = "SELECT id_paciente, comienzo, finalizacion, lugar, motivo, examen, diagnostico, recomendaciones,
+            $sql = "SELECT c.id, id_paciente, comienzo, lugar, motivo, examen, diagnostico, recomendaciones,
             receta, observaciones, p.nombre, p.apellido
             from consulta as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where m.id = ? and id_paciente = ?";
+            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.id DESC";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico, $data->id_paciente));
@@ -241,4 +240,73 @@ class Expediente
             die($e->getMessage());
         }
     }
+
+    public function CrearCita(expediente $data)
+    {
+        try {
+            $sql = "INSERT INTO citas (id_paciente, comienzo, motivo)
+            VALUES (?,?,?)";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id_paciente,
+                $data->comienzo,
+                $data->motivo
+            ));
+
+            return $this->msg = "Cita creada con exito&t=text-success";
+        } catch (Exception $e) {
+            die($e->getMessage());
+            return $this->msg = "Error al crear la cita, verifique nuevamente&t=text-danger";
+        }
+    }
+
+    public function VerCita(expediente $data)
+    {
+        try {
+            $sql = "SELECT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
+            from citas as c
+            join paciente as p on c.id_paciente = p.id
+            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.comienzo DESC";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($data->id_medico, $data->id_paciente));
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function VerCitaprincipal(expediente $data)
+    {
+        try {
+            $sql = "SELECT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
+            from citas as c
+            join paciente as p on c.id_paciente = p.id
+            join medico as m where m.id = ? ORDER BY c.id DESC LIMIT 5";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($data->id_medico));
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function BuscarPaciente(expediente $data)
+    {
+        try {
+            $sql = "SELECT * FROM paciente WHERE id_medico = ? AND nombre = ? OR apellido = ? OR cedula=? ";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($data->id_medico, $data->buscador, $data->buscador, $data->buscador));
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
 }

@@ -31,17 +31,13 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
-            require("view/bienvenida.php");
-        }
-    }
+            $Datosantecedentes = new Expediente();
+            $Datosantecedentes->id_medico = $_SESSION['id'];
 
-    public function contactenos()
-    {
-        if ($_SESSION["acceso"] != true) {
-            require("view/login.php");
-            header('Location: ?op=login');
-        } else {
-            require("view/contactenos.php");
+            $Datoscita = new Expediente();
+            $Datoscita = $this->expedienteModel->VerCitaprincipal($Datosantecedentes);
+
+            require("view/bienvenida.php");
         }
     }
 
@@ -160,12 +156,13 @@ class Controller
             $Datosexpediente = new Expediente();
             $Datosexpediente = $this->expedienteModel->VerExpediente($Datosantecedentes);
 
+            $Datoscita = new Expediente();
+            $Datoscita = $this->expedienteModel->VerCita($Datosantecedentes);
+
             $Datosantec = new Expediente();
             if($this->expedienteModel->VerAntecedentes($Datosantecedentes)){
                 $Datosantec = $this->expedienteModel->VerAntecedentes($Datosantecedentes);
             }
-
-            
 
             require("view/expedientepac.php");
         }
@@ -248,12 +245,36 @@ class Controller
         }
     }
 
+    public function CrearCita()
+    {
+        $consulta = new Expediente();
+
+        $id_pac = $_GET['pac'];
+
+        $consulta->comienzo = $_REQUEST['comienzo'];
+        $consulta->finalizacion = $_REQUEST['finalizacion'];
+        $consulta->motivo = $_REQUEST['motivo'];
+        $consulta->id_paciente = $id_pac;
+
+        if ($this->resp = $this->expedienteModel->CrearCita($consulta)) {
+            header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
+        }
+    }
+
     public function buscador()
     {
         if ($_SESSION["acceso"] != true) {
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $Datosantecedentes = new Expediente();
+            
+            $Datosantecedentes->id_medico = $_GET['med'];
+            $Datosantecedentes->buscador = $_REQUEST['buscar'];
+
+            $Busqueda = new Expediente();
+            $Busqueda = $this->expedienteModel->BuscarPaciente($Datosantecedentes);
+
             require("view/buscador.php");
         }
     }

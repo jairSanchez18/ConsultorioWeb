@@ -37,10 +37,10 @@
                 <div class="bg-primary text-white p-2 fw-bold">
                     <i class="bi bi-search px-2"></i>Buscador
                 </div>
-                <form action="./?op=buscador" method="post">
+                <form action="./?op=buscador&med=<?php echo $_SESSION['id']; ?>" method="post">
                     <div class="form-floating m-3">
-                        <input type="text" name="nombre" class="form-control" id="floatingInput" placeholder="Nombre o Apellido" required>
-                        <label for="floatingInput">Ingrese la cedula del paciente</label>
+                        <input type="text" name="buscar" class="form-control" id="floatingInput" placeholder="Nombre o Apellido" required>
+                        <label for="floatingInput">Ingrese la cedula o nombre del paciente</label>
                     </div>
                     <div class="entrar d-grid gap-2 m-3">
                         <button class="btn btn-outline-dark p-2" type="submit">Buscar paciente</button>
@@ -56,23 +56,19 @@
                         <tr>
                             <th>Paciente</th>
                             <th>Motivo</th>
-                            <th>Fecha de cita</th>
+                            <th>Fecha de cita asignada</th>
                             <th class="text-center">Ver Detalles</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Juan Sapata</td>
-                            <td>Dolores Musculares</td>
-                            <td>22/11/2022</td>
-                            <td class="text-center"><a href="./?op=expedientepac" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>Pedro Suira</td>
-                            <td>Radiografía</td>
-                            <td>01/02/2023</td>
-                            <td class="text-center"><a href="#" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
-                        </tr>
+                        <?php foreach ($Datoscita as $lc) { ?>
+                            <tr>
+                                <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
+                                <td><?php echo $lc->motivo; ?></td>
+                                <td><?php echo $lc->comienzo; ?></td>
+                                <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
