@@ -65,7 +65,9 @@
                             <tr>
                                 <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                                 <td><?php echo $lc->motivo; ?></td>
-                                <td><?php echo $lc->comienzo; ?></td>
+                                <td>
+                                    <?php echo $lc->comienzo;?>
+                                </td>
                                 <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
                             </tr>
                         <?php } ?>

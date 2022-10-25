@@ -269,6 +269,7 @@
                                                 <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                                                 <td><?php echo $lc->motivo; ?></td>
                                                 <td><?php echo $lc->comienzo; ?>2</td>
+                                                <td class="text-center"><a href="./?op=borrarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -315,6 +316,7 @@
                                                 <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                                                 <td><?php echo $lc->motivo; ?></td>
                                                 <td><?php echo $lc->comienzo; ?>2</td>
+                                                <td class="text-center"><a href="./?op=borrarcita&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

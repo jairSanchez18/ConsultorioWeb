@@ -267,7 +267,7 @@ class Expediente
             $sql = "SELECT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
             from citas as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.comienzo DESC";
+            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.comienzo ASC";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico, $data->id_paciente));
@@ -284,7 +284,7 @@ class Expediente
             $sql = "SELECT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
             from citas as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where m.id = ? ORDER BY c.id DESC LIMIT 5";
+            join medico as m where m.id = ? ORDER BY c.comienzo ASC LIMIT 5";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico));
@@ -298,7 +298,7 @@ class Expediente
     public function BuscarPaciente(expediente $data)
     {
         try {
-            $sql = "SELECT * FROM paciente WHERE id_medico = ? AND nombre = ? OR apellido = ? OR cedula=? ";
+            $sql = "SELECT * FROM paciente WHERE id_medico = ? AND nombre = ? OR apellido = ? OR cedula=?";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico, $data->buscador, $data->buscador, $data->buscador));
@@ -306,6 +306,38 @@ class Expediente
             return $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
+        }
+    }
+
+    public function BorrarCita(expediente $data){
+        try{
+            $sql = "DELETE FROM citas WHERE id = ?";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id
+            ));
+
+            return $this->msg = "La consulta fue borrada con exito&t=text-success";
+            
+        }catch(Exception $e){
+            die($e->getMessage());
+            return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
+        }
+    }
+
+    public function BorrarConsulta(expediente $data){
+        try{
+            $sql = "DELETE FROM consulta WHERE id = ?";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id
+            ));
+
+            return $this->msg = "La consulta fue borrada con exito&t=text-success";
+            
+        }catch(Exception $e){
+            die($e->getMessage());
+            return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
         }
     }
     
