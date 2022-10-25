@@ -39,6 +39,10 @@ if (isset($_GET['op'])) {
         $controller->GuardarAntecedente();
     }else if ($opcion == "crearconsulta") {
         $controller->CrearConsulta();
+    }else if ($opcion == "borrarcita") {
+        $controller->BorrarCita();
+    }else if ($opcion == "borrarconsulta") {
+        $controller->BorrarConsulta();
     }else if ($opcion == "crearcita") {
         $controller->CrearCita();
     }   else {

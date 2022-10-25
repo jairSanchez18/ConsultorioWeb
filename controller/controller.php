@@ -334,4 +334,25 @@ class Controller
             header('Location: ?op=perfil&msg=Contraseña actualizada&t=text-success');
         }
     }
+
+    public function BorrarConsulta(){
+        
+        $borrar = new Expediente();
+        $borrar->id = $_GET['id'];
+        $id_pac = $_GET['pac'];
+
+        if($this->resp =  $this->expedienteModel->BorrarConsulta($borrar)){
+            header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
+        }
+    }
+
+    public function BorrarCita(){
+        $borrar = new Expediente();
+        $borrar->id = $_GET['id'];
+        $id_pac = $_GET['pac'];
+
+        if($this->resp =  $this->expedienteModel->BorrarCita($borrar)){
+            header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
+        }
+    }
 }
