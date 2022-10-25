@@ -317,11 +317,11 @@ class Expediente
                 $data->id
             ));
 
-            return $this->msg = "La consulta fue borrada con exito&t=text-success";
+            return $this->msg = "La cita fue borrada con exito&t=text-success";
             
         }catch(Exception $e){
             die($e->getMessage());
-            return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
+            return $this->msg = "Error al borrar la cita, intente nuevamente&t=text-danger";
         }
     }
 
