@@ -281,10 +281,10 @@ class Expediente
     public function VerCitaprincipal(expediente $data)
     {
         try {
-            $sql = "SELECT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
+            $sql = "SELECT DISTINCT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
             from citas as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where m.id = ? ORDER BY c.comienzo ASC LIMIT 5";
+            join medico as m where p.id_medico = ? ORDER BY c.comienzo ASC LIMIT 5";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico));

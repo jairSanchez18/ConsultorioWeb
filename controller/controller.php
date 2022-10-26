@@ -101,9 +101,12 @@ class Controller
             $DatosreporteF = new Reportes();
             $DatosreporteE = new Reportes();
 
-            $DatosreporteM = $this->reportesModel->CantidadHombres();
-            $DatosreporteF = $this->reportesModel->CantidadMujeres();
-            $DatosreporteE = $this->reportesModel->Edades();
+            $datos = new Reportes();
+            $datos->id_medico = $_SESSION['id'];
+
+            $DatosreporteM = $this->reportesModel->CantidadHombres($datos);
+            $DatosreporteF = $this->reportesModel->CantidadMujeres($datos);
+            $DatosreporteE = $this->reportesModel->Edades($datos);
 
             require("view/reportes.php");
         }

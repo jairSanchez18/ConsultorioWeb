@@ -78,27 +78,27 @@
                         <p class="mt-5 fw-bold">pacientes por edad:</p>
                         <div class="row">
                             <div class="col">Infantes (0-2):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad1  ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad1)){echo $DatosreporteE->Edad1;}else{ echo "0";} ?></div>
                         </div>
                         <div class="row">
                             <div class="col">Preescolar (3-7):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad2  ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad2)){echo $DatosreporteE->Edad2;}else{ echo "0";}  ?></div>
                         </div>
                         <div class="row">
                             <div class="col">Escolares (8-12):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad3 ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad3)){echo $DatosreporteE->Edad3;}else{ echo "0";} ?></div>
                         </div>
                         <div class="row">
                             <div class="col">Adolecentes (13-18):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad4 ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad4)){echo $DatosreporteE->Edad4;}else{ echo "0";} ?></div>
                         </div>
                         <div class="row">
                             <div class="col">Adulto (19-65):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad5  ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad5)){echo $DatosreporteE->Edad5;}else{ echo "0";}  ?></div>
                         </div>
                         <div class="row">
                             <div class="col">Adultos mayores (66-):</div>
-                            <div class="col"><?php echo $DatosreporteE->Edad6  ?></div>
+                            <div class="col"><?php if(isset($DatosreporteE->Edad6)){echo $DatosreporteE->Edad6;}else{ echo "0";}  ?></div>
                         </div>
                     </div>
                 </div>

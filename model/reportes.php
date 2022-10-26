@@ -4,6 +4,8 @@ class Reportes
 {
     private $pdo;
 
+    public $id_medico;
+
     public function __construct()
     {
         try {
@@ -13,12 +15,12 @@ class Reportes
         }
     }
 
-    public function CantidadHombres()
+    public function CantidadHombres(reportes $data)
     {
         try {
-            $sql = "SELECT count(sexo) as 'sexo' FROM paciente WHERE sexo ='Masculino'";
+            $sql = "SELECT count(sexo) as 'sexo' FROM paciente WHERE sexo ='Masculino' AND id_medico=?";
             $stm = $this->pdo->prepare($sql);
-            $stm->execute();
+            $stm->execute(array($data->id_medico));
 
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -26,12 +28,12 @@ class Reportes
         }
     }
 
-    public function CantidadMujeres()
+    public function CantidadMujeres(reportes $data)
     {
         try {
-            $sql = "SELECT count(sexo) as 'sexo' FROM paciente WHERE sexo ='Femenino'";
+            $sql = "SELECT count(sexo) as 'sexo' FROM paciente WHERE sexo ='Femenino' AND id_medico=?";
             $stm = $this->pdo->prepare($sql);
-            $stm->execute();
+            $stm->execute(array($data->id_medico));
 
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -39,13 +41,13 @@ class Reportes
         }
     }
 
-    public function Edades()
+    public function Edades(reportes $data)
     {
         try {
-            $sql = "CALL Edades";
+            $sql = "CALL Edades(?)";
 
             $stm = $this->pdo->prepare($sql);
-            $stm->execute();
+            $stm->execute(array($data->id_medico));
 
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
