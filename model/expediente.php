@@ -226,11 +226,11 @@ class Expediente
     public function VerConsulta(expediente $data)
     {
         try {
-            $sql = "SELECT c.id, id_paciente, comienzo, lugar, motivo, examen, diagnostico, recomendaciones,
+            $sql = "SELECT c.id, id_paciente, comienzo, finalizacion, lugar, motivo, examen, diagnostico, recomendaciones,
             receta, observaciones, p.nombre, p.apellido
             from consulta as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.id DESC";
+            join medico as m where m.id = ? and id_paciente = ? ORDER BY c.finalizacion ASC";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico, $data->id_paciente));
