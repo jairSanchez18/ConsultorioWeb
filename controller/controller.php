@@ -4,13 +4,14 @@ session_start();
 require_once 'model/medico.php';
 require_once 'model/expediente.php';
 require_once 'model/paciente.php';
+require_once 'model/reportes.php';
 
 class Controller
 {
     private $medicoModel;
     private $expedienteModel;
     private $pacientesModel;
-    private $consultaModel;
+    private $reportesModel;
     private $resp;
 
     public function __construct()
@@ -18,6 +19,7 @@ class Controller
         $this->medicoModel = new Medico();
         $this->expedienteModel = new Expediente();
         $this->pacientesModel = new Pacientes();
+        $this->reportesModel = new Reportes();
     }
 
     public function login()
@@ -95,6 +97,14 @@ class Controller
             require("view/login.php");
             header('Location: ?op=login');
         } else {
+            $DatosreporteM = new Reportes();
+            $DatosreporteF = new Reportes();
+            $DatosreporteE = new Reportes();
+
+            $DatosreporteM = $this->reportesModel->CantidadHombres();
+            $DatosreporteF = $this->reportesModel->CantidadMujeres();
+            $DatosreporteE = $this->reportesModel->Edades();
+
             require("view/reportes.php");
         }
     }

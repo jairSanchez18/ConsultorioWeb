@@ -68,7 +68,7 @@
                                 <td>
                                     <?php echo $lc->comienzo;?>
                                 </td>
-                                <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                                <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id_paciente ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
