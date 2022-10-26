@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de pacientes</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css" />
     <!-- UIkit JS -->
@@ -18,6 +17,7 @@
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="public/css/estilos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <style>
         a {
@@ -53,7 +53,7 @@
             <i class="bi bi-person-fill px-2"></i>Informacion del expediente
         </div>
         <div class="border p-2">
-            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium">
+            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-slide-vertical, uk-animation-slide-right-medium">
                 <li><a href="#"><i class="bi bi-journal-medical px-2"></i>Informacion General</a></li>
                 <li><a href="#"><i class="bi bi-hourglass px-2"></i>Antecendentes</a></li>
                 <li><a href="#"><i class="bi bi-file-person px-2"></i>Consultas Medicas</a></li>
@@ -253,7 +253,7 @@
                             </div>
                             <div class="expeB">
                                 <div class="bg-dark text-white p-2 fw-bold mb-3">
-                                    <i class="bi bi-book px-2"></i>Lista de consultas
+                                    <i class="bi bi-book px-2"></i>Consultas programadas
                                 </div>
                                 <table class="table font-opciones">
                                     <thead>
@@ -300,7 +300,7 @@
                             </div>
                             <div class="expeB">
                                 <div class="bg-dark text-white p-2 fw-bold mb-3">
-                                    <i class="bi bi-book px-2"></i>Lista de citas
+                                    <i class="bi bi-book px-2"></i>Citas programadas
                                 </div>
                                 <table class="table font-opciones">
                                     <thead>
