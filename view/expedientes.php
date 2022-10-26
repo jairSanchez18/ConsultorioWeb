@@ -92,7 +92,7 @@
                             <label for="floatingSelect">Servicio que presta asistencia (Obligatorio)</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" name="medico" class="form-control" id="floatingInput" placeholder="medico" required>
+                            <input type="text" value="<?php echo $_SESSION['user']; ?>" name="medico" class="form-control" id="floatingInput" placeholder="medico" required>
                             <label for="floatingInput">Medico Responsable (Obligatorio)</label>
                         </div>
                         <div class="form-floating mb-3">
