@@ -47,6 +47,7 @@
         <table class="table table-pacientes">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Información</th>
@@ -54,8 +55,9 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($Listapaciente as $p) { ?>
+                <?php $pac = 0; foreach ($Listapaciente as $p) { ?>
                     <tr>
+                        <th><?php echo $pac=$pac+1 ?></th>
                         <td><?php echo $p->nombre ?></td>
                         <td><?php echo $p->apellido ?></td>
                         <td>Nacimiento: <?php echo $p->nacimiento ?> <br>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de pacientes</title>
+    <title>Reportes</title>
 
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/estilos.css">
@@ -73,6 +73,10 @@
                         <div class="row">
                             <div class="col"><i class="bi bi-gender-female px-1"></i>Femeninos:</div>
                             <div class="col"><?php echo $DatosreporteF->sexo ?></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><i class="bi bi-person-plus px-1"></i>Total de pacientes:</div>
+                            <div class="col"><?php echo $total = $DatosreporteF->sexo + $DatosreporteM->sexo ?></div>
                         </div>
                         <hr class="mt-5">
                         <p class="mt-5 fw-bold">pacientes por edad:</p>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de pacientes</title>
+    <title>Expediente del paciente</title>
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css" />
@@ -270,7 +270,7 @@
                                                 <td><?php echo $lc->motivo; ?></td>
                                                 <td><?php echo $lc->comienzo; ?>2</td>
                                                 <td class="text-center"><a href="./?op=borrarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                                                <td class="text-center"><a href="./?op=modificarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                                                <a href="./?op=modificarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a>
                                                 </td>
                                             </tr>
                                         <?php } ?>

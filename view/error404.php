@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="public/css/estilos.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
     
-    <title>Bienvenido</title>
+    <title>Error - Pagina no encontrada</title>
 
     <style>
         footer{
