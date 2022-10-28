@@ -253,7 +253,7 @@
                             </div>
                             <div class="expeB">
                                 <div class="bg-dark text-white p-2 fw-bold mb-3">
-                                    <i class="bi bi-book px-2"></i>Consultas programadas
+                                    <i class="bi bi-book px-2"></i>Consultas
                                 </div>
                                 <table class="table font-opciones">
                                     <thead>
@@ -268,7 +268,7 @@
                                             <tr>
                                                 <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                                                 <td><?php echo $lc->motivo; ?></td>
-                                                <td><?php echo $lc->finalizacion; ?>2</td>
+                                                <td><?php echo $lc->comienzo; ?>2</td>
                                                 <td class="text-center"><a href="./?op=borrarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
                                             </tr>
                                         <?php } ?>
