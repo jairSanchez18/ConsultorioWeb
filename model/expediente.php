@@ -241,6 +241,24 @@ class Expediente
         }
     }
 
+    public function VerConsulta2(expediente $data)
+    {
+        try {
+            $sql = "SELECT c.id, id_paciente, comienzo, finalizacion, lugar, motivo, examen, diagnostico, recomendaciones,
+            receta, observaciones, p.nombre, p.apellido
+            from consulta as c
+            join paciente as p on c.id_paciente = p.id
+            join medico as m where m.id = ? and id_paciente = ? and c.id = ?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array($data->id_medico, $data->id_paciente,$data->id_consulta));
+
+            return $stm->fetch(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function CrearCita(expediente $data)
     {
         try {
@@ -338,6 +356,32 @@ class Expediente
         } catch (Exception $e) {
             die($e->getMessage());
             return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
+        }
+    }
+
+    public function ActualizarConsulta(expediente $data){
+        try {
+            $sql = "UPDATE consulta SET comienzo =?, finalizacion=?,
+            lugar=?, motivo=?, examen=?, diagnostico=?, recomendaciones=?,
+            receta=?, observaciones=? WHERE id = ?";
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->comienzo,
+                $data->finalizacion,
+                $data->lugar,
+                $data->motivo,
+                $data->examen,
+                $data->diagnostico,
+                $data->recomendaciones,
+                $data->receta,
+                $data->observaciones,
+                $data->id_consulta
+            ));
+
+            return $this->msg = "La consulta fue actualizada con exito&t=text-success";
+        } catch (Exception $e) {
+            die($e->getMessage());
+            return $this->msg = "Error al actualizar la consulta, intente nuevamente&t=text-danger";
         }
     }
 }
