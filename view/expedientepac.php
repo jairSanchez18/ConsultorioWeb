@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de pacientes</title>
-    
+
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css" />
     <!-- UIkit JS -->
@@ -46,8 +46,8 @@
             <p class="<?php if (isset($_GET['t'])) {
                             echo $_GET['t'];
                         } ?>"><?php if (isset($_GET['msg'])) {
-                                                                                echo $_GET['msg'];
-                                                                            } ?></p>
+                                    echo $_GET['msg'];
+                                } ?></p>
         </div>
         <div class="bg-primary text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Informacion del expediente
@@ -269,7 +269,9 @@
                                                 <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                                                 <td><?php echo $lc->motivo; ?></td>
                                                 <td><?php echo $lc->comienzo; ?>2</td>
-                                                <td class="text-center"><a href="./?op=borrarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
+                                                <td class="text-center"><a href="./?op=borrarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                                <td class="text-center"><a href="./?op=modificarconsulta&id=<?php echo $lc->id ?>&pac=<?php echo $lc->id_paciente ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

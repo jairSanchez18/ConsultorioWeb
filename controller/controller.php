@@ -370,4 +370,45 @@ class Controller
             header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
         }
     }
+
+    public function EditarConsulta()
+    {
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            $Datosexpediente = new Expediente();
+            $Datosantecedentes = new Expediente();
+
+            $Datosantecedentes->id_paciente = $_GET['pac'];
+            $Datosantecedentes->id_medico = $_SESSION['id'];
+            $Datosantecedentes->id_consulta = $_GET['id'];
+
+            $Datosexpediente = $this->expedienteModel->VerConsulta2($Datosantecedentes);
+
+            require("view/ver_consulta.php");
+        }
+    }
+
+    public function ActualizarConsulta(){
+        $consulta = new Expediente();
+
+        $id_consulta = $_GET['id'];
+        $id_paciente = $_GET['pac'];
+
+        $consulta->comienzo = $_REQUEST['comienzo'];
+        $consulta->finalizacion = $_REQUEST['finalizacion'];
+        $consulta->lugar = $_REQUEST['lugar'];
+        $consulta->motivo = $_REQUEST['motivo'];
+        $consulta->examen = $_REQUEST['examen'];
+        $consulta->diagnostico = $_REQUEST['diagnostico'];
+        $consulta->recomendaciones = $_REQUEST['recomendaciones'];
+        $consulta->receta = $_REQUEST['receta'];
+        $consulta->observaciones = $_REQUEST['observaciones'];
+        $consulta->id_consulta = $id_consulta;
+
+        if ($this->resp = $this->expedienteModel->ActualizarConsulta($consulta)) {
+            header('Location: ?op=modificarconsulta&msg=' . $this->resp .'&id='.$id_consulta.'&pac='.$id_paciente);
+        }
+    }
 }

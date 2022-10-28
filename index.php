@@ -35,17 +35,21 @@ if (isset($_GET['op'])) {
         $controller->ActualizarContraseña();
     } else if ($opcion == "general") {
         $controller->InfoGeneral();
-    }else if ($opcion == "infoantecedente") {
+    } else if ($opcion == "infoantecedente") {
         $controller->GuardarAntecedente();
-    }else if ($opcion == "crearconsulta") {
+    } else if ($opcion == "crearconsulta") {
         $controller->CrearConsulta();
-    }else if ($opcion == "borrarcita") {
+    } else if ($opcion == "borrarcita") {
         $controller->BorrarCita();
-    }else if ($opcion == "borrarconsulta") {
+    } else if ($opcion == "borrarconsulta") {
         $controller->BorrarConsulta();
-    }else if ($opcion == "crearcita") {
+    } else if ($opcion == "modificarconsulta") {
+        $controller->EditarConsulta();
+    } else if ($opcion == "crearcita") {
         $controller->CrearCita();
-    }   else {
+    } else if ($opcion == "actualizarconsulta") {
+        $controller->ActualizarConsulta();
+    } else {
         $controller->error404();
     }
 } else {
