@@ -173,7 +173,7 @@ class Controller
             $Datoscita = $this->expedienteModel->VerCita($Datosantecedentes);
 
             $Datosantec = new Expediente();
-            if($this->expedienteModel->VerAntecedentes($Datosantecedentes)){
+            if ($this->expedienteModel->VerAntecedentes($Datosantecedentes)) {
                 $Datosantec = $this->expedienteModel->VerAntecedentes($Datosantecedentes);
             }
 
@@ -281,7 +281,7 @@ class Controller
             header('Location: ?op=login');
         } else {
             $Datosantecedentes = new Expediente();
-            
+
             $Datosantecedentes->id_medico = $_GET['med'];
             $Datosantecedentes->buscador = $_REQUEST['buscar'];
 
@@ -336,7 +336,7 @@ class Controller
     {
         $medico = new Medico();
 
-        $medico->passold = $_REQUEST['passprincipal'];
+        $medico->passold = md5($_REQUEST['passprincipal']);
         $medico->passnueva = md5($_REQUEST['pass1']);
         $medico->id = $_SESSION['id'];
 
@@ -348,23 +348,25 @@ class Controller
         }
     }
 
-    public function BorrarConsulta(){
-        
+    public function BorrarConsulta()
+    {
+
         $borrar = new Expediente();
         $borrar->id = $_GET['id'];
         $id_pac = $_GET['pac'];
 
-        if($this->resp =  $this->expedienteModel->BorrarConsulta($borrar)){
+        if ($this->resp =  $this->expedienteModel->BorrarConsulta($borrar)) {
             header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
         }
     }
 
-    public function BorrarCita(){
+    public function BorrarCita()
+    {
         $borrar = new Expediente();
         $borrar->id = $_GET['id'];
         $id_pac = $_GET['pac'];
 
-        if($this->resp =  $this->expedienteModel->BorrarCita($borrar)){
+        if ($this->resp =  $this->expedienteModel->BorrarCita($borrar)) {
             header('Location: ?op=expedientepac&msg=' . $this->resp . '&pac=' . $id_pac);
         }
     }
