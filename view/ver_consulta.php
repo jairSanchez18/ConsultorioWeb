@@ -112,11 +112,12 @@
                 </div>
             </form>
         </div>
-        <footer uk-sticky="position: bottom">
-            <?php
-            require_once('template/footer.php');
-            ?>
-        </footer>
+    </div>
+    <footer uk-sticky="position: bottom">
+        <?php
+        require_once('template/footer.php');
+        ?>
+    </footer>
 </body>
 
 </html>
