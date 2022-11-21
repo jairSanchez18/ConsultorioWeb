@@ -40,6 +40,9 @@ class Expediente
     public $receta;
     public $observaciones;
     public $id_medico;
+    public $nacimiento;
+    public $activo;
+    public $id;
 
     public function __construct()
     {
@@ -54,8 +57,8 @@ class Expediente
     {
         try {
             $sql = "INSERT INTO paciente (id_medico, nombre, apellido, sexo, cedula,
-            seguro, procedencia, habitacion, telefono, ingreso, servicio, medico, enfermera, direccion, cama, identificacion, email, nacimiento)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            seguro, procedencia, habitacion, telefono, ingreso, servicio, medico, enfermera, direccion, cama, identificacion, email, nacimiento, activo)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array(
@@ -76,12 +79,12 @@ class Expediente
                 $data->cama,
                 $data->identificacion,
                 $data->email,
-                $data->nacimiento
+                $data->nacimiento,
+                $data->activo
             ));
 
             return $this->msg = "El expediente del paciente fue creado con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al crear el expediente del paciente&t=text-danger";
         }
     }
@@ -128,7 +131,6 @@ class Expediente
 
             return $this->msg = "Informacion general actualizada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Ocurrio un error al actualizar la informacion&t=text-danger";
         }
     }
@@ -167,7 +169,6 @@ class Expediente
 
             return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al actualizar los antecedentes del paciente&t=text-danger";
         }
     }
@@ -338,7 +339,6 @@ class Expediente
 
             return $this->msg = "La cita fue borrada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al borrar la cita, intente nuevamente&t=text-danger";
         }
     }
@@ -382,6 +382,38 @@ class Expediente
         } catch (Exception $e) {
             die($e->getMessage());
             return $this->msg = "Error al actualizar la consulta, intente nuevamente&t=text-danger";
+        }
+    }
+
+    public function Actividad(expediente $data)
+    {
+        try {
+            $sql = "UPDATE paciente SET activo=2 WHERE id=?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id_paciente
+            ));
+
+            return $this->msg = "Expediente puesto en inactivo con exito&t=text-success";
+        } catch (Exception $e) {
+            return $this->msg = "Ocurrio un error al volver inactivo el expediente&t=text-danger";
+        }
+    }
+
+    public function Actividad2(expediente $data)
+    {
+        try {
+            $sql = "UPDATE paciente SET activo=1 WHERE id=?";
+
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute(array(
+                $data->id_paciente
+            ));
+
+            return $this->msg = "Expediente puesto en activo con exito&t=text-success";
+        } catch (Exception $e) {
+            return $this->msg = "Ocurrio un error al volver activo el expediente&t=text-danger";
         }
     }
 }

@@ -38,10 +38,27 @@
     </header>
     <div class="container mb-5">
         <div class="mt-5">
-            <h3 class="h3 text-primary"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes</h3>
+            <h3 class="h3 text-primary"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes <?php if ($_GET['op'] == "paciente") {echo "activos";}else{echo "inactivos";}?>
+            </h3>
         </div>
         <hr class="mb-5">
-        <div class="bg-primary text-white p-2 fw-bold">
+        <div class="text-start">
+            <p class="<?php if (isset($_GET['t'])) {
+                echo $_GET['t'];
+            } ?>">
+                <?php if (isset($_GET['msg'])) {
+                    echo $_GET['msg'];
+                } ?>
+            </p>
+            <p class="<?php if (isset($_GET['t2'])) {
+                echo $_GET['t2'];
+            } ?>">
+                <?php if (isset($_GET['msg2'])) {
+                    echo $_GET['msg2'];
+                } ?>
+            </p>
+        </div>
+        <div class="<?php if ($_GET['op'] == "paciente") { echo "bg-primary";}else{echo "bg-danger";} ?> text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Lista de Pacientes
         </div>
         <table class="table table-pacientes">
@@ -55,25 +72,48 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $pac = 0; foreach ($Listapaciente as $p) { ?>
-                    <tr>
-                        <th><?php echo $pac=$pac+1 ?></th>
-                        <td><?php echo $p->nombre ?></td>
-                        <td><?php echo $p->apellido ?></td>
-                        <td>Nacimiento: <?php echo $p->nacimiento ?> <br>
-                            Edad: <?php echo $p->edad ?> Años <br>
-                            Email: <?php echo $p->email ?></td>
-                        <td class="text-center">
-                            <div class="dropdown">
-                                <button class="btn btn-warning dropdown-toggle font-opciones" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Opciones Generales
-                                </button>
-                                <ul class="dropdown-menu font-opciones">
-                                    <li><a class="dropdown-item" style="text-decoration: none;" href="./?op=expedientepac&pac=<?php echo $p->id ?>">Ver el expediente clinico</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                <?php $pac = 0;
+                foreach ($Listapaciente as $p) { ?>
+                <tr>
+                    <th>
+                        <?php echo $pac = $pac + 1 ?>
+                    </th>
+                    <td>
+                        <?php echo $p->nombre ?>
+                    </td>
+                    <td>
+                        <?php echo $p->apellido ?>
+                    </td>
+                    <td>Nacimiento:
+                        <?php echo $p->nacimiento ?> <br>
+                        Edad:
+                        <?php echo $p->edad ?> Años <br>
+                        Email:
+                        <?php echo $p->email ?>
+                    </td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-warning dropdown-toggle font-opciones" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Opciones Generales
+                            </button>
+                            <ul class="dropdown-menu font-opciones">
+                                <li><a class="dropdown-item" style="text-decoration: none;"
+                                        href="./?op=expedientepac&pac=<?php echo $p->id ?>">Ver el expediente
+                                        clinico</a></li>
+                                <?php if ($_GET['op'] == "paciente") { ?>
+                                <li><a class="dropdown-item bg-danger text-white" style="text-decoration: none;"
+                                        href="./?op=expedienteinactivo&pac=<?php echo $p->id ?>">Deshabilitar expediente
+                                        clinico</a></li>
+                                <?php } else { ?>
+                                <li><a class="dropdown-item bg-success text-white" style="text-decoration: none;"
+                                        href="./?op=expedienteactivo&pac=<?php echo $p->id ?>">Habilitar expediente
+                                        clinico</a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
                 <?php } ?>
             </tbody>
         </table>

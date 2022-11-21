@@ -17,6 +17,8 @@ if (isset($_GET['op'])) {
         $controller->salir();
     } else if ($opcion == "paciente") {
         $controller->paciente();
+    } else if ($opcion == "pacienteinactivo") {
+        $controller->pacienteinactivo();
     } else if ($opcion == "reporte") {
         $controller->reporte();
     } else if ($opcion == "expediente") {
@@ -49,7 +51,11 @@ if (isset($_GET['op'])) {
         $controller->CrearCita();
     } else if ($opcion == "actualizarconsulta") {
         $controller->ActualizarConsulta();
-    } else {
+    } else if ($opcion == "expedienteinactivo") {
+        $controller->ExpedienteInactivo();
+    }else if ($opcion == "expedienteactivo") {
+        $controller->ExpedienteActivo();
+    }  else {
         $controller->error404();
     }
 } else {

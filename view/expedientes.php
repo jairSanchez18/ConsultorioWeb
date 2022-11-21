@@ -86,8 +86,7 @@
                                 <option value="Ambulancia" selected>Ambulancia</option>
                                 <option value="Helicoptero">Helicoptero</option>
                                 <option value="Guardía Costera">Guardía Costera</option>
-                                <option value="paciente">Paciente</option>
-                                <option value="ninguna">Ninguna de las anteriores</option>
+                                <option value="ninguna">Ninguna</option>
                             </select>
                             <label for="floatingSelect">Servicio que presta asistencia (Obligatorio)</label>
                         </div>

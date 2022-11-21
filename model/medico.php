@@ -40,8 +40,9 @@ class Medico
     {
         try {
             $stm = $this->pdo
-                ->prepare("SELECT nombre, apellido, sexo, nacimiento, telefono, email, cedula
+                ->prepare("SELECT nombre, apellido, sexo, nacimiento, telefono, email, cedula, id_especialidad
                             FROM medico AS M
+                            JOIN especialidad AS E on M.id_especialidad = E.id
                             JOIN credenciales as C on M.id = C.id WHERE M.id = ?");
 
             $stm->execute(array($id));
@@ -51,10 +52,23 @@ class Medico
         }
     }
 
+    public function ObtenerEspecialidad()
+    {
+        try {
+            $stm = $this->pdo->prepare("SELECT * FROM especialidad");
+
+            $stm->execute();
+
+            return $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     //Actualizacion del perfil del medico
     public function ActualizarPerfil(medico $data){
         try{
-            $sql = "UPDATE medico SET nombre=?, apellido=?, sexo=?, nacimiento=?, telefono=? WHERE id = ?";
+            $sql = "UPDATE medico SET nombre=?, apellido=?, sexo=?, nacimiento=?, telefono=?, id_especialidad=? WHERE id = ?";
 
             $this->pdo->prepare($sql)
             ->execute(array(
@@ -63,6 +77,7 @@ class Medico
                 $data->sexo,
                 $data->nacimiento,
                 $data->telefono,
+                $data->id_especialidad,
                 $data->id
             ));
             

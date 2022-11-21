@@ -13,6 +13,7 @@ class Controller
     private $pacientesModel;
     private $reportesModel;
     private $resp;
+    public $especialidad;
 
     public function __construct()
     {
@@ -85,7 +86,30 @@ class Controller
             header('Location: ?op=login');
         } else {
             $Listapaciente = new Pacientes();
-            $Listapaciente = $this->pacientesModel->VerPacientes($_SESSION['id']);
+            $info = new Pacientes();
+
+            $info->id_medico = $_SESSION['id'];
+            $info->activo = 1;
+
+            $Listapaciente = $this->pacientesModel->VerPacientes($info);
+
+            require("view/pacientes.php");
+        }
+    }
+
+    public function pacienteinactivo()
+    {
+        if ($_SESSION["acceso"] != true) {
+            require("view/login.php");
+            header('Location: ?op=login');
+        } else {
+            $Listapaciente = new Pacientes();
+            $info = new Pacientes();
+            
+            $info->id_medico = $_SESSION['id'];
+            $info->activo = 2;
+
+            $Listapaciente = $this->pacientesModel->VerPacientes($info);
 
             require("view/pacientes.php");
         }
@@ -122,6 +146,28 @@ class Controller
         }
     }
 
+    public function ExpedienteInactivo(){
+        $inactivo = new Expediente();
+
+        $inactivo->id_paciente = $_GET['pac'];
+        if ($this->resp = $this->expedienteModel->Actividad($inactivo)) {
+            header('Location: ?op=paciente&msg=' . $this->resp);
+        } else {
+            header('Location: ?op=paciente&msg=' . $this->resp);
+        }
+    }
+
+    public function ExpedienteActivo(){
+        $activo = new Expediente();
+
+        $activo->id_paciente = $_GET['pac'];
+        if ($this->resp = $this->expedienteModel->Actividad2($activo)) {
+            header('Location: ?op=pacienteinactivo&msg=' . $this->resp);
+        } else {
+            header('Location: ?op=pacienteinactivo&msg=' . $this->resp);
+        }
+    }
+
     public function GuardarExpediente()
     {
         $expediente = new Expediente();
@@ -144,6 +190,7 @@ class Controller
         $expediente->email = $_REQUEST['email'];
         $expediente->nacimiento = $_REQUEST['nacimiento'];
         $expediente->id_medico = $_SESSION['id'];
+        $expediente->activo = 1;
 
         if ($this->resp = $this->expedienteModel->CrearExpediente($expediente)) {
             header('Location: ?op=expediente&msg=' . $this->resp);
@@ -299,6 +346,7 @@ class Controller
             header('Location: ?op=login');
         } else {
             $medico = $this->medicoModel->Obtener($_SESSION['id']);
+            $espec = $this->medicoModel->ObtenerEspecialidad();
 
             require("view/perfil.php");
         }
@@ -315,6 +363,7 @@ class Controller
         $medico->nacimiento = $_REQUEST['nacimiento'];
         $medico->telefono = $_REQUEST['telefono'];
         $medico->id = $_SESSION['id'];
+        $medico->id_especialidad = $_REQUEST['especialidad'];
 
         $mensaje = "&msg2=";
 

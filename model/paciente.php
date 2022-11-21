@@ -5,6 +5,8 @@ class Pacientes
 
     private $pdo;
     private $msg;
+    public $id_medico;
+    public $activo;
 
     public function __construct()
     {
@@ -15,12 +17,15 @@ class Pacientes
         }
     }
 
-    public function VerPacientes($id)
+    public function VerPacientes(Pacientes $data)
     {
         try {
-            $sql = "SELECT *, TIMESTAMPDIFF(YEAR,nacimiento,CURDATE()) as 'edad' FROM paciente WHERE id_medico=?";
+            $sql = "SELECT *, TIMESTAMPDIFF(YEAR,nacimiento,CURDATE()) as 'edad' FROM paciente WHERE id_medico=? and activo = ?";
             $stm = $this->pdo->prepare($sql);
-            $stm->execute(array($id));
+            $stm->execute(array(
+                $data->id_medico,
+                $data->activo
+            ));
 
             return $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
