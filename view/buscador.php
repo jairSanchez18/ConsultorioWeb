@@ -50,6 +50,7 @@
                     <tr>
                         <th>Paciente</th>
                         <th>Cedula</th>
+                        <th class="text-center">Estado</th>
                         <th class="text-center">Ver Detalles</th>
                     </tr>
                 </thead>
@@ -58,7 +59,8 @@
                         <tr>
                             <td><?php echo $lc->nombre . " " . $lc->apellido; ?></td>
                             <td><?php echo $lc->cedula; ?></td>
-                            <td class="text-center"><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a></td>
+                            <td class="<?php if($lc->activo == 1){echo "bg-success";}else{echo "bg-danger";} ?>"></td>
+                            <td class="text-center"><?php if($lc->activo == 1){ ?><a href="./?op=expedientepac&pac=<?php echo $lc->id ?>" class="btn btn-warning"><i class="bi bi-eye-fill"></i></a><?php }else{ echo "Debe habilitar el expediente";} ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

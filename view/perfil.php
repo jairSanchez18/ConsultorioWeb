@@ -62,6 +62,14 @@
                             <label for="floatingInput">Apellido (Obligatorio)</label>
                         </div>
                         <div class="form-floating mb-3">
+                        <select class="form-select" name="especialidad" id="floatingSelect" aria-label="Floating label select example" required>
+                                <?php foreach ($espec as $e) { ?>
+                                <option value="<?php echo $e->id ?>" <?php if($medico->id_especialidad == $e->id){ echo "selected"; } ?>><?php echo $e->especialidad ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="floatingSelect">Especialidad (Obligatorio)</label>
+                        </div>
+                        <div class="form-floating mb-3">
                             <input type="text" name="cedula" value="<?php echo $medico->cedula; ?>" class="form-control" id="floatingInput" placeholder="id" disabled>
                             <label for="floatingInput">Cedula (Obligatorio)</label>
                         </div>
