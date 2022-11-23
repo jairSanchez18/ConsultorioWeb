@@ -43,6 +43,9 @@ class Expediente
     public $nacimiento;
     public $activo;
     public $id;
+    public $id_pac;
+    public $id_consulta;
+    public $buscador;
 
     public function __construct()
     {
@@ -192,7 +195,6 @@ class Expediente
 
             return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al actualizar los antecedentes del paciente&t=text-danger";
         }
     }
@@ -219,7 +221,6 @@ class Expediente
 
             return $this->msg = "Consulta creada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al crear la consulta, verifique nuevamente&t=text-danger";
         }
     }
@@ -275,7 +276,6 @@ class Expediente
 
             return $this->msg = "Cita creada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al crear la cita, verifique nuevamente&t=text-danger";
         }
     }
@@ -303,7 +303,7 @@ class Expediente
             $sql = "SELECT DISTINCT c.id, id_paciente, comienzo, motivo, p.nombre, p.apellido
             from citas as c
             join paciente as p on c.id_paciente = p.id
-            join medico as m where p.id_medico = ? ORDER BY c.comienzo ASC LIMIT 5";
+            join medico as m where p.id_medico = ? AND p.activo = 1 ORDER BY c.comienzo ASC LIMIT 5";
 
             $stm = $this->pdo->prepare($sql);
             $stm->execute(array($data->id_medico));
@@ -354,7 +354,6 @@ class Expediente
 
             return $this->msg = "La consulta fue borrada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
         }
     }
@@ -380,7 +379,6 @@ class Expediente
 
             return $this->msg = "La consulta fue actualizada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al actualizar la consulta, intente nuevamente&t=text-danger";
         }
     }
