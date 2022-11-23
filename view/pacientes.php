@@ -38,7 +38,8 @@
     </header>
     <div class="container mb-5">
         <div class="mt-5">
-            <h3 class="h3 text-primary"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes <?php if ($_GET['op'] == "paciente") {echo "activos";}else{echo "inactivos";}?>
+            <h3 class="h3 text-primary"><i class="bi bi-journal-medical px-2"></i>Información general de los pacientes
+                <?php if ($_GET['op'] == "paciente") {echo "activos";}else{echo "inactivos";}?>
             </h3>
         </div>
         <hr class="mb-5">
@@ -58,7 +59,8 @@
                 } ?>
             </p>
         </div>
-        <div class="<?php if ($_GET['op'] == "paciente") { echo "bg-primary";}else{echo "bg-danger";} ?> text-white p-2 fw-bold">
+        <div
+            class="<?php if ($_GET['op'] == "paciente") { echo "bg-primary";}else{echo "bg-danger";} ?> text-white p-2 fw-bold">
             <i class="bi bi-person-fill px-2"></i>Lista de Pacientes
         </div>
         <table class="table table-pacientes">
@@ -89,7 +91,9 @@
                         Edad:
                         <?php echo $p->edad ?> Años <br>
                         Email:
-                        <?php echo $p->email ?>
+                        <?php echo $p->email ?> <br>
+                        Cedula:
+                        <?php echo $p->cedula ?>
                     </td>
                     <td class="text-center">
                         <div class="dropdown">
@@ -98,9 +102,11 @@
                                 Opciones Generales
                             </button>
                             <ul class="dropdown-menu font-opciones">
+                                <?php if ($_GET['op'] == "paciente") { ?>
                                 <li><a class="dropdown-item" style="text-decoration: none;"
                                         href="./?op=expedientepac&pac=<?php echo $p->id ?>">Ver el expediente
                                         clinico</a></li>
+                                <?php } ?>
                                 <?php if ($_GET['op'] == "paciente") { ?>
                                 <li><a class="dropdown-item bg-danger text-white" style="text-decoration: none;"
                                         href="./?op=expedienteinactivo&pac=<?php echo $p->id ?>">Deshabilitar expediente
