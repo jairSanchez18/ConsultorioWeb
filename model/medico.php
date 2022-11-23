@@ -6,6 +6,17 @@ class Medico
 {
     private $pdo;
     private $msg;
+    public $email;
+    public $pass;
+    public $nombre;
+    public $apellido;
+    public $sexo;
+    public $nacimiento;
+    public $telefono;
+    public $id_especialidad;
+    public $id;
+    public $passold;
+    public $passnueva;
 
     public function __construct()
     {
@@ -83,7 +94,6 @@ class Medico
             
             return $this->msg = "Se han guardado los cambios correctamente&t=text-success";
         }catch(Exception $e){
-            die($e->getMessage());
             return $this->msg = "Ocurrio un Error en el sistema&t=text-danger";
         }
     }

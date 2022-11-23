@@ -43,6 +43,9 @@ class Expediente
     public $nacimiento;
     public $activo;
     public $id;
+    public $id_pac;
+    public $id_consulta;
+    public $buscador;
 
     public function __construct()
     {
@@ -192,7 +195,6 @@ class Expediente
 
             return $this->msg = "Los antecedentes del paciente fueron actualizado con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al actualizar los antecedentes del paciente&t=text-danger";
         }
     }
@@ -219,7 +221,6 @@ class Expediente
 
             return $this->msg = "Consulta creada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al crear la consulta, verifique nuevamente&t=text-danger";
         }
     }
@@ -275,7 +276,6 @@ class Expediente
 
             return $this->msg = "Cita creada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al crear la cita, verifique nuevamente&t=text-danger";
         }
     }
@@ -354,7 +354,6 @@ class Expediente
 
             return $this->msg = "La consulta fue borrada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al borrar la consulta, intente nuevamente&t=text-danger";
         }
     }
@@ -380,7 +379,6 @@ class Expediente
 
             return $this->msg = "La consulta fue actualizada con exito&t=text-success";
         } catch (Exception $e) {
-            die($e->getMessage());
             return $this->msg = "Error al actualizar la consulta, intente nuevamente&t=text-danger";
         }
     }
