@@ -125,9 +125,6 @@
                                         <option value="Guardía Costera" <?php if ($Datosexpediente->servicio == "Guardía Costera") {
                                                                             echo "selected";
                                                                         } ?>>Guardía Costera</option>
-                                        <option value="paciente" <?php if ($Datosexpediente->servicio == "paciente") {
-                                                                        echo "selected";
-                                                                    } ?>>Paciente</option>
                                         <option value="ninguna" <?php if ($Datosexpediente->servicio == "ninguna") {
                                                                     echo "selected";
                                                                 } ?>>Ninguna de las anteriores</option>
